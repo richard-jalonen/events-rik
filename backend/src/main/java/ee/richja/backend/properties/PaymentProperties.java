@@ -12,5 +12,5 @@ import java.util.List;
 @Component
 @ConfigurationProperties(prefix = "payment")
 public class PaymentProperties {
-    public List<String> types;
+    private List<String> types;
 }
