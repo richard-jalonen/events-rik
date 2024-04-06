@@ -1,7 +1,9 @@
 <template>
-  <AppHeader />
-  <RouterView />
-  <AppFooter />
+  <div class="container">
+    <AppHeader />
+    <RouterView />
+    <AppFooter />
+  </div>
 </template>
 
 <script setup lang="ts">

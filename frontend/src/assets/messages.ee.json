@@ -1,0 +1,19 @@
+{
+  "common": {
+  },
+  "header": {
+    "homePage": "AVALEHT",
+    "addEvent": "ÜRITUSE LISAMINE"
+  },
+  "footer": {},
+  "home": {
+  },
+  "eventAdd": {
+  },
+  "eventEdit": {
+  },
+  "personAdd": {
+  },
+  "personEdit": {
+  }
+}

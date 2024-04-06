@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import axios from 'axios'
+import ApiClient from '@/client/api.client'
 
 export const usePaymentStore = defineStore('payment', {
   state: () => ({
@@ -16,7 +16,7 @@ export const usePaymentStore = defineStore('payment', {
     },
     async fetchPaymentOptions() {
       try {
-        const data = await axios.get('http://localhost:8080/api/v1/payments')
+        const data = await ApiClient.getPaymentOptions()
         this.paymentOptions = data.data
       } catch (error) {
         console.log(error)
