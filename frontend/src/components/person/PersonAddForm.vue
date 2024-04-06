@@ -34,8 +34,6 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import AddPrivatePersonForm from '@/components/person/AddPrivatePersonForm.vue'
-import AddLegalPersonForm from '@/components/person/AddLegalPersonForm.vue'
 import LegalPersonForm from '@/components/person/LegalPersonForm.vue'
 import PrivatePersonForm from '@/components/person/PrivatePersonForm.vue'
 
