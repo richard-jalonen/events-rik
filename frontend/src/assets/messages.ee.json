@@ -5,7 +5,43 @@
     "homePage": "AVALEHT",
     "addEvent": "ÜRITUSE LISAMINE"
   },
-  "footer": {},
+  "footer": {
+    "generalInfo": {
+      "firstComponent": {
+        "header": "Vivamus",
+        "firstText": "Pellentesque",
+        "secondText": "Donec",
+        "thirdText": "Nullam",
+        "fourthText": "Morbi tincidunt"
+      },
+      "secondComponent": {
+        "header": "Suspendisse",
+        "firstText": "Morbi pulvinar",
+        "secondText": "Phasellus",
+        "thirdText": "Integer sit",
+        "fourthText": "Nullam"
+      }
+    },
+    "contactInfo": {
+      "header": "Kontakt",
+      "mainOffice": "Peakontor:",
+      "secondaryOffice": "Harukontor:",
+      "phone": "Telefon:",
+      "fax": "Faks:",
+      "firstOfficeExample": {
+        "city": "Tallinnas",
+        "address": "Väike-Ameerika 1, 11415 Tallinn",
+        "phone": "605 4450",
+        "fax": "605 3186"
+      },
+      "secondOfficeExample": {
+        "city": "Võrus",
+        "address": "Oja tn 7 (külastusaadress)",
+        "phone": "605 3330",
+        "fax": "605 3155"
+      }
+    }
+  },
   "home": {
   },
   "eventAdd": {
