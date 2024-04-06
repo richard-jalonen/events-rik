@@ -40,7 +40,7 @@
           />
         </div>
       </div>
-      <div class="row mb-2">
+      <div class="row mb-3">
         <div class="col-4">{{ $t('personAdd.paymentType') }}</div>
         <div class="col-4">
           <select

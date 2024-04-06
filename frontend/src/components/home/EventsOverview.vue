@@ -4,9 +4,7 @@
     <div class="p-3">
       <div>
         <div v-for="(event, index) of events" :key="event.uuid" class="row">
-          <div class="col-1">
-            {{ index + 1 }}
-          </div>
+          <div class="col-1">{{ index + 1 }}.</div>
           <div class="col">
             {{ event.name }}
           </div>

@@ -71,7 +71,11 @@
     "name": "Ürituse nimi:",
     "time": "Toimumisaeg:",
     "location": "Koht:",
-    "participants": "Osavõtjad:"
+    "participants": "Osavõtjad:",
+    "buttons": {
+      "view": "VAATA",
+      "delete": "KUSTUTA"
+    }
   },
   "personAdd": {
     "header": "Osavõtjate lisamine",

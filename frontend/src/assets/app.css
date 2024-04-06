@@ -49,3 +49,7 @@ a:hover {
 .error {
   border: 1px solid red;
 }
+
+.text-sm {
+  font-size: 0.75rem;
+}
