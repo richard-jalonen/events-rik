@@ -5,7 +5,7 @@ import ee.richja.backend.domain.person.LegalPerson;
 import ee.richja.backend.domain.person.Person;
 import ee.richja.backend.domain.person.PrivatePerson;
 import ee.richja.backend.properties.PaymentProperties;
-import ee.richja.backend.repository.person.PersonRepository;
+import ee.richja.backend.repository.PersonRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -51,7 +51,8 @@ public class PersonService {
         } else {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Unknown person type: " + request.getType());
         }
-        log.info("Person created");
-        return personRepository.save(person);
+        Person createdPerson = personRepository.save(person);
+        log.info("Person {} created", createdPerson.getUuid());
+        return createdPerson;
     }
 }

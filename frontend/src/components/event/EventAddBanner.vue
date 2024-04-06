@@ -4,7 +4,7 @@
       <h4 class="text-light text-center fw-lighter">{{ $t('eventAdd.header') }}</h4>
     </div>
     <div class="col d-flex justify-content-center align-items-center">
-      <img class="my-auto" :src="eventBanner" alt="banner" />
+      <img class="my-auto" :src="eventBanner" alt="banner" @load="imageLoaded" />
     </div>
   </div>
 </template>
@@ -16,7 +16,13 @@ import eventBanner from '@/assets/images/grass.jpg'
 export default defineComponent({
   data() {
     return {
-      eventBanner
+      eventBanner,
+      loaded: false
+    }
+  },
+  methods: {
+    imageLoaded() {
+      this.loaded = true
     }
   }
 })

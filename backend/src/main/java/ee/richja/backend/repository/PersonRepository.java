@@ -1,4 +1,4 @@
-package ee.richja.backend.repository.person;
+package ee.richja.backend.repository;
 
 import ee.richja.backend.domain.person.Person;
 import org.springframework.data.jpa.repository.JpaRepository;

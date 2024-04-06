@@ -45,3 +45,7 @@ a:hover {
 .text-blue {
   color: rgb(0 89 161);
 }
+
+.error {
+  border: 1px solid red;
+}

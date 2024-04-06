@@ -7,7 +7,7 @@
       class="flex-fill custom-text-lg mx-5 my-auto fw-lighter"
       v-html="$t('home.bannerText')"
     ></div>
-    <img :src="welcomeBannerImg" alt="banner" />
+    <img :src="welcomeBannerImg" alt="banner" @load="setHeight" />
   </div>
 </template>
 
@@ -22,10 +22,12 @@ export default defineComponent({
       maxHeight: 0
     }
   },
-  beforeMount() {
-    let img = new Image()
-    img.src = welcomeBannerImg
-    this.maxHeight = img.naturalHeight
+  methods: {
+    setHeight() {
+      let img = new Image()
+      img.src = this.welcomeBannerImg
+      this.maxHeight = img.naturalHeight
+    }
   }
 })
 </script>
