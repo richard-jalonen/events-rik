@@ -1,6 +1,7 @@
 package ee.richja.backend.service;
 
 import ee.richja.backend.api.request.PersonCreateRequest;
+import ee.richja.backend.api.request.PersonUpdateRequest;
 import ee.richja.backend.domain.person.LegalPerson;
 import ee.richja.backend.domain.person.Person;
 import ee.richja.backend.domain.person.PrivatePerson;
@@ -9,9 +10,12 @@ import ee.richja.backend.repository.PersonRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
+
+import java.util.UUID;
 
 @Slf4j
 @Service
@@ -54,5 +58,19 @@ public class PersonService {
         Person createdPerson = personRepository.save(person);
         log.info("Person {} created", createdPerson.getUuid());
         return createdPerson;
+    }
+
+    public Person getPersonByUuid(UUID uuid) {
+        log.info("Asking for person {}", uuid);
+        return personRepository.findById(uuid).orElse(null);
+    }
+
+    public void update(PersonUpdateRequest request) {
+        log.info("Updating person-{}", request.getUuid());
+        Person person = personRepository.findById(request.getUuid()).orElseThrow(() ->
+                new ResponseStatusException(HttpStatus.NOT_FOUND, "Person not found"));
+        BeanUtils.copyProperties(request, person);
+        personRepository.save(person);
+        log.info("Person-{} updated", person.getUuid());
     }
 }

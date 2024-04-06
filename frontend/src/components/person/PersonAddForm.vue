@@ -27,8 +27,8 @@
         </label>
       </div>
     </div>
-    <AddPrivatePersonForm v-if="type === 'PRIVATE'" :event-uuid="eventUuid" />
-    <AddLegalPersonForm v-else :event-uuid="eventUuid" />
+    <PrivatePersonForm v-if="type === 'PRIVATE'" :event-uuid="eventUuid" />
+    <LegalPersonForm v-else :event-uuid="eventUuid" />
   </div>
 </template>
 
@@ -36,9 +36,11 @@
 import { defineComponent } from 'vue'
 import AddPrivatePersonForm from '@/components/person/AddPrivatePersonForm.vue'
 import AddLegalPersonForm from '@/components/person/AddLegalPersonForm.vue'
+import LegalPersonForm from '@/components/person/LegalPersonForm.vue'
+import PrivatePersonForm from '@/components/person/PrivatePersonForm.vue'
 
 export default defineComponent({
-  components: { AddPrivatePersonForm, AddLegalPersonForm },
+  components: { PrivatePersonForm, LegalPersonForm },
   props: {
     eventUuid: {
       type: String,

@@ -12,10 +12,12 @@ import java.util.UUID;
 @Data
 public class PersonDto {
     private UUID uuid;
+    private String type;
     private String paymentType;
     private String firstName;
     private String lastName;
     private String personCode;
+    private Long participantCount;
     private String additionalInfo;
 
     public static PersonDto createDto(Person person) {
@@ -23,6 +25,7 @@ public class PersonDto {
         personDto.setUuid(person.getUuid());
         personDto.setPaymentType(person.getPaymentType());
         if (person instanceof PrivatePerson privatePerson) {
+            personDto.setType("PRIVATE");
             personDto.setUuid(person.getUuid());
             personDto.setPaymentType(person.getPaymentType());
             personDto.setFirstName(privatePerson.getFirstName());
@@ -31,8 +34,10 @@ public class PersonDto {
             personDto.setAdditionalInfo(privatePerson.getAdditionalInfo());
         } else {
             LegalPerson legalPerson = (LegalPerson) person;
+            personDto.setType("LEGAL");
             personDto.setFirstName(legalPerson.getFirstName());
             personDto.setPersonCode(legalPerson.getPersonCode());
+            personDto.setParticipantCount(legalPerson.getParticipantCount());
             personDto.setAdditionalInfo(legalPerson.getAdditionalInfo());
         }
         return personDto;

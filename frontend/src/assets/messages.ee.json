@@ -94,5 +94,7 @@
       "save": "Salvesta"
     }
   },
-  "personEdit": {}
+  "personEdit": {
+    "header": "Osavõtja info"
+  }
 }
