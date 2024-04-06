@@ -37,3 +37,11 @@ a:hover {
 .custom-text-lg {
   font-size: 1.6rem; /* Adjust size as needed */
 }
+
+#event-banner {
+  max-height: 6em;
+}
+
+.text-blue {
+  color: rgb(0 89 161);
+}

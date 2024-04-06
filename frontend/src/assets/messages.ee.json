@@ -53,7 +53,19 @@
       "participants": "OSAVÕTJAD"
     }
   },
-  "eventAdd": {},
+  "eventAdd": {
+    "header": "Ürituse lisamine",
+    "form": {
+      "eventName": "Ürituse nimi:",
+      "eventTime": "Toimumisaeg:",
+      "location": "Koht:",
+      "additionalInfo": "Lisainfo:",
+      "buttons": {
+        "back": "Tagasi",
+        "add": "Lisa"
+      }
+    }
+  },
   "eventEdit": {},
   "personAdd": {},
   "personEdit": {}

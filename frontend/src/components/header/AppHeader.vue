@@ -34,14 +34,10 @@ import logoSrc from '@/assets/images/logo.svg'
 import symbolSrc from '@/assets/images/symbol.svg'
 
 export default defineComponent({
-  setup() {
-    return {
-      logoSrc,
-      symbolSrc
-    }
-  },
   data() {
     return {
+      logoSrc,
+      symbolSrc,
       isActive: true,
       hasError: false
     }
