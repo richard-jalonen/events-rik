@@ -21,7 +21,7 @@
               v-if="canDeleteEvents"
               :src="removeSvg"
               alt="remove"
-              @load="imageLoaded"
+              @load="true"
               style="max-width: 1em"
             />
           </div>
@@ -60,13 +60,7 @@ export default defineComponent({
   data() {
     return {
       FormatUtil,
-      removeSvg,
-      loaded: false
-    }
-  },
-  methods: {
-    imageLoaded() {
-      this.loaded = true
+      removeSvg
     }
   }
 })

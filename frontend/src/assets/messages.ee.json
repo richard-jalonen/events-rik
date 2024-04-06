@@ -66,7 +66,26 @@
       }
     }
   },
-  "eventEdit": {},
-  "personAdd": {},
+  "eventEdit": {
+    "header": "Osavõtjad",
+    "name": "Ürituse nimi:",
+    "time": "Toimumisaeg:",
+    "location": "Koht:",
+    "participants": "Osavõtjad:"
+  },
+  "personAdd": {
+    "header": "Osavõtjate lisamine",
+    "firstName": "Eesnimi:",
+    "lastName": "Perenimi:",
+    "personCode": "isikukood:",
+    "paymentType": "Maksmisviis:",
+    "additionalInfo": "Lisainfo:",
+    "buttons": {
+      "private": "Eraisik",
+      "legal": "Ettevõte",
+      "back": "Tagasi",
+      "save": "Salvesta"
+    }
+  },
   "personEdit": {}
 }

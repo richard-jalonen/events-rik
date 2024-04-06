@@ -1,8 +1,11 @@
+import type { Person } from '@/models/Person'
+
 export interface Event {
   uuid: string
   name: string
   time: string
-  participantUuids: string[]
+  location: string
+  participants: Person[]
 }
 
 export interface EventCreateRequest {

@@ -8,8 +8,8 @@
 
 <script setup lang="ts">
 import { RouterView } from 'vue-router'
-import AppHeader from './components/header/AppHeader.vue'
-import AppFooter from './components/footer/AppFooter.vue'
+import AppHeader from '@/components/common/header/AppHeader.vue'
+import AppFooter from '@/components/common/footer/AppFooter.vue'
 import { usePaymentStore } from '@/stores/payment'
 
 initialize()

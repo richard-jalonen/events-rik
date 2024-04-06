@@ -8,8 +8,8 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import GeneralInfo from '@/components/footer/GeneralInfo.vue'
-import ContactInfo from '@/components/footer/ContactInfo.vue'
+import GeneralInfo from '@/components/common/footer/GeneralInfo.vue'
+import ContactInfo from '@/components/common/footer/ContactInfo.vue'
 import translationsEe from '@/assets/messages.ee.json'
 
 export default defineComponent({

@@ -86,7 +86,6 @@ export default defineComponent({
   methods: {
     async addEvent() {
       const isValid = await this.v$.$validate()
-      console.log(isValid)
       if (isValid) {
         await ApiClient.createEvent({
           name: this.form.eventName!,

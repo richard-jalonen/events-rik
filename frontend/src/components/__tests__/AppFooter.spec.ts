@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest'
 
 import { mount } from '@vue/test-utils'
-import AppFooter from '../footer/AppFooter.vue'
+import AppFooter from '../common/footer/AppFooter.vue'
 
 describe('AppFooter', () => {
   it('shows required content', () => {

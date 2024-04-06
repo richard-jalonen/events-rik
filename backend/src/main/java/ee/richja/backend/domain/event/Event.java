@@ -2,6 +2,7 @@ package ee.richja.backend.domain.event;
 
 
 import ee.richja.backend.domain.AggregateRoot;
+import ee.richja.backend.domain.person.Person;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.NotEmpty;
@@ -32,6 +33,9 @@ public class Event extends AggregateRoot {
     private String additionalInfo;
     @ElementCollection
     @CollectionTable(name = "event_participant", joinColumns = @JoinColumn(name = "event_uuid"))
-    @Column(name = "person_uuid")
-    private Set<UUID> participantUuids;
+    private Set<Person> participants;
+
+    public void addParticipant(Person person) {
+        participants.add(person);
+    }
 }
