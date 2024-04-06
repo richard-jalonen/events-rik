@@ -1,7 +1,5 @@
 <template>
-  <div>
-    Upcoming
-  </div>
+  <div>Upcoming</div>
 </template>
 
 <script lang="ts">

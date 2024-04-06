@@ -4,13 +4,21 @@
       <img class="align-self-center" :src="logoSrc" alt="logo" />
     </div>
     <div class="d-flex align-items-stretch flex-fill px-5">
-      <router-link class="align-content-center px-3"
-                   :class="{ 'bg-blue': getRouterPath == '/', 'text-dark-gray': getRouterPath != '/' }" to="/">
+      <router-link
+        class="align-content-center px-3"
+        :class="{ 'bg-blue': getRouterPath == '/', 'text-dark-gray': getRouterPath != '/' }"
+        to="/"
+      >
         <span>{{ $t('header.homePage') }}</span>
       </router-link>
-      <router-link class="align-content-center px-3"
-                   :class="{ 'bg-blue': getRouterPath == '/event', 'text-dark-gray': getRouterPath !== '/event' }"
-                   to="/event">
+      <router-link
+        class="align-content-center px-3"
+        :class="{
+          'bg-blue': getRouterPath == '/event',
+          'text-dark-gray': getRouterPath !== '/event'
+        }"
+        to="/event"
+      >
         <span>{{ $t('header.addEvent') }}</span>
       </router-link>
     </div>

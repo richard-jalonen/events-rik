@@ -1,6 +1,5 @@
 {
-  "common": {
-  },
+  "common": {},
   "header": {
     "homePage": "AVALEHT",
     "addEvent": "ÜRITUSE LISAMINE"
@@ -43,13 +42,10 @@
     }
   },
   "home": {
+    "bannerText": "Lorem ipsum dolor sit amet, <strong>consectetur adipisicing</strong> elit. Animi aperiam atque consequuntur cupiditate delectus <strong>deserunt</strong> dicta eligendi enim eos harum illo optio quo quod recusandae sunt, tenetur vel veniam voluptatum!"
   },
-  "eventAdd": {
-  },
-  "eventEdit": {
-  },
-  "personAdd": {
-  },
-  "personEdit": {
-  }
+  "eventAdd": {},
+  "eventEdit": {},
+  "personAdd": {},
+  "personEdit": {}
 }
