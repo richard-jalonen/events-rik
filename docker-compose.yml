@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: frontend
+    container_name: frontend
+    ports:
+      - "8082:5173"
+    networks:
+      - app-network
+    depends_on:
+      - backend
+    environment:
+      VITE_API_URL: http://localhost:8081
+
+  backend:
+    build:
+      context: backend
+    container_name: backend
+    ports:
+      - "8081:8080"
+    networks:
+      - app-network
+    depends_on:
+      - db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/events_rik
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: root
+
+  db:
+    image: postgres
+    restart: always
+    ports:
+      - "5433:5432"
+    networks:
+      - app-network
+    environment:
+      POSTGRES_DB: events_rik
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: root
+
+networks:
+  app-network:
+    driver: bridge

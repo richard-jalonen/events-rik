@@ -32,6 +32,10 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
+springBoot {
+	mainClass = 'ee.richja.backend.BackendApplication'
+}
+
 tasks.named('test') {
 	useJUnitPlatform()
 }
