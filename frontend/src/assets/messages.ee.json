@@ -42,7 +42,16 @@
     }
   },
   "home": {
-    "bannerText": "Lorem ipsum dolor sit amet, <strong>consectetur adipisicing</strong> elit. Animi aperiam atque consequuntur cupiditate delectus <strong>deserunt</strong> dicta eligendi enim eos harum illo optio quo quod recusandae sunt, tenetur vel veniam voluptatum!"
+    "bannerText": "Lorem ipsum dolor sit amet, <strong>consectetur adipisicing</strong> elit. Animi aperiam atque consequuntur cupiditate delectus <strong>deserunt</strong> dicta eligendi enim eos harum illo optio quo quod recusandae sunt, tenetur vel veniam voluptatum!",
+    "upcomingEvents": {
+      "header": "Tulevased üritused",
+      "participants": "OSAVÕTJAD",
+      "addEvent": "LISA ÜRITUS"
+    },
+    "pastEvents": {
+      "header": "Toimunud üritused",
+      "participants": "OSAVÕTJAD"
+    }
   },
   "eventAdd": {},
   "eventEdit": {},

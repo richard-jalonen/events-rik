@@ -22,7 +22,7 @@ export default defineComponent({
       maxHeight: 0
     }
   },
-  mounted() {
+  beforeMount() {
     let img = new Image()
     img.src = welcomeBannerImg
     this.maxHeight = img.naturalHeight
