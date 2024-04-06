@@ -76,8 +76,11 @@
   "personAdd": {
     "header": "Osavõtjate lisamine",
     "firstName": "Eesnimi:",
+    "companyName": "Ettevõtte nimi:",
     "lastName": "Perenimi:",
     "personCode": "isikukood:",
+    "companyCode": "Registrikood:",
+    "participantCount": "Osalejate arv:",
     "paymentType": "Maksmisviis:",
     "additionalInfo": "Lisainfo:",
     "buttons": {

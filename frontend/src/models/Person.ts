@@ -11,6 +11,7 @@ export interface PersonCreateRequest {
   type: string
   firstName: string
   lastName?: string
+  participantCount?: number
   personCode: string
   paymentType: string
   additionalInfo: string

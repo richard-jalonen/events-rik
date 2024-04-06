@@ -2,33 +2,20 @@
   <div>
     <div class="grid">
       <div class="row mb-2">
-        <div class="col-4">{{ $t('personAdd.firstName') }}</div>
+        <div class="col-4">{{ $t('personAdd.companyName') }}</div>
         <div class="col-4">
           <input
             class="w-100"
-            v-model="form.firstName"
+            v-model="form.companyName"
             type="text"
             :class="{
-              error: v$.form.firstName.$error
+              error: v$.form.companyName.$error
             }"
           />
         </div>
       </div>
       <div class="row mb-2">
-        <div class="col-4">{{ $t('personAdd.lastName') }}</div>
-        <div class="col-4">
-          <input
-            class="w-100"
-            v-model="form.lastName"
-            type="text"
-            :class="{
-              error: v$.form.lastName.$error
-            }"
-          />
-        </div>
-      </div>
-      <div class="row mb-2">
-        <div class="col-4">{{ $t('personAdd.personCode') }}</div>
+        <div class="col-4">{{ $t('personAdd.companyCode') }}</div>
         <div class="col-4">
           <input
             class="w-100"
@@ -36,6 +23,19 @@
             type="number"
             :class="{
               error: v$.form.personCode.$error
+            }"
+          />
+        </div>
+      </div>
+      <div class="row mb-2">
+        <div class="col-4">{{ $t('personAdd.participantCount') }}</div>
+        <div class="col-4">
+          <input
+            class="w-100"
+            v-model="form.participantCount"
+            type="number"
+            :class="{
+              error: v$.form.participantCount.$error
             }"
           />
         </div>
@@ -94,9 +94,9 @@ export default defineComponent({
     return {
       router,
       form: {
-        firstName: null,
-        lastName: null,
+        companyName: null,
         personCode: null,
+        participantCount: null,
         paymentType: null,
         additionalInfo: ''
       }
@@ -105,9 +105,9 @@ export default defineComponent({
   validations() {
     return {
       form: {
-        firstName: { required },
-        lastName: { required },
+        companyName: { required },
         personCode: { required },
+        participantCount: { required },
         paymentType: { required }
       }
     }
@@ -117,10 +117,10 @@ export default defineComponent({
       const isValid = await this.v$.$validate()
       if (isValid) {
         await ApiClient.createPerson(this.eventUuid, {
-          type: 'PRIVATE',
-          firstName: this.form.firstName!,
-          lastName: this.form.lastName!,
+          type: 'LEGAL',
+          firstName: this.form.companyName!,
           personCode: this.form.personCode!,
+          participantCount: this.form.participantCount!,
           paymentType: this.form.paymentType!,
           additionalInfo: this.form.additionalInfo
         })
