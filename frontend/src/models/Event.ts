@@ -1,5 +1,8 @@
 export interface Event {
-  todo: string
+  uuid: string
+  name: string
+  time: string
+  participantUuids: string[]
 }
 
 export interface EventCreateRequest {

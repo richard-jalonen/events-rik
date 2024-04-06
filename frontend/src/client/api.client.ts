@@ -11,4 +11,8 @@ export default class ApiClient {
   public static createEvent(request: EventCreateRequest) {
     return axios.post(`${apiUrl}/api/v1/events`, request)
   }
+
+  public static getEvents() {
+    return axios.get(`${apiUrl}/api/v1/events`)
+  }
 }

@@ -2,8 +2,17 @@
   <div>
     <WelcomeBanner />
     <div class="my-4 grid d-flex gap-4">
-      <EventsOverview class="col" :translations="translations.ee.home.upcomingEvents" />
-      <EventsOverview class="col" :translations="translations.ee.home.pastEvents" />
+      <EventsOverview
+        class="col"
+        :events="upcomingEvents"
+        :translations="translations.ee.home.upcomingEvents"
+        can-delete-events
+      />
+      <EventsOverview
+        :events="pastEvents"
+        class="col"
+        :translations="translations.ee.home.pastEvents"
+      />
     </div>
   </div>
 </template>
@@ -13,6 +22,7 @@ import { defineComponent } from 'vue'
 import WelcomeBanner from '@/components/home/WelcomeBanner.vue'
 import EventsOverview from '@/components/home/EventsOverview.vue'
 import translationsEe from '@/assets/messages.ee.json'
+import { useEventStore } from '@/stores/event'
 
 export default defineComponent({
   components: { EventsOverview, WelcomeBanner },
@@ -21,6 +31,17 @@ export default defineComponent({
       translations: {
         ee: translationsEe
       }
+    }
+  },
+  beforeMount() {
+    useEventStore().initialize()
+  },
+  computed: {
+    upcomingEvents() {
+      return useEventStore().getFutureEvents
+    },
+    pastEvents() {
+      return useEventStore().getPastEvents
     }
   }
 })

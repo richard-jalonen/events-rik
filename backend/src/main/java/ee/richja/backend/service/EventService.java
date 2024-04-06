@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 @Slf4j
@@ -30,6 +31,12 @@ public class EventService {
     }
 
     public Event getEventByUuid(UUID uuid) {
+        log.info("Asking for event {}", uuid);
         return eventRepository.findById(uuid).orElse(null);
+    }
+
+    public List<Event> getAllEvents() {
+        log.info("Asking for all events");
+        return eventRepository.findAll();
     }
 }

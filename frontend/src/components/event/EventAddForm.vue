@@ -41,7 +41,7 @@
         </div>
       </div>
       <div class="d-flex gap-2">
-        <button type="button" class="btn btn-secondary btn-sm">
+        <button type="button" class="btn btn-secondary btn-sm" @click="router.go(-1)">
           {{ $t('eventAdd.form.buttons.back') }}
         </button>
         <button type="button" class="btn btn-primary btn-sm" @click="addEvent">
@@ -65,6 +65,7 @@ export default defineComponent({
   },
   data() {
     return {
+      router,
       form: {
         eventName: null,
         eventTime: null,
