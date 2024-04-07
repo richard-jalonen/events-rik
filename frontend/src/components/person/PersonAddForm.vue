@@ -4,22 +4,22 @@
     <div class="d-flex offset-4">
       <div class="form-check me-4 mb-3 ms-2">
         <input
+          id="private"
+          v-model="type"
           class="form-check-input"
           type="radio"
           name="flexRadioDefault"
-          id="private"
-          v-model="type"
           value="PRIVATE"
         />
         <label class="form-check-label" for="private">{{ $t('personAdd.buttons.private') }} </label>
       </div>
       <div class="form-check">
         <input
+          id="legal"
+          v-model="type"
           class="form-check-input"
           type="radio"
           name="flexRadioDefault"
-          id="legal"
-          v-model="type"
           value="LEGAL"
         />
         <label class="form-check-label" for="legal">
@@ -33,9 +33,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import LegalPersonForm from '@/components/person/LegalPersonForm.vue'
 import PrivatePersonForm from '@/components/person/PrivatePersonForm.vue'
+import LegalPersonForm from '@/components/person/LegalPersonForm.vue'
+import { defineComponent } from 'vue'
 
 export default defineComponent({
   components: { PrivatePersonForm, LegalPersonForm },

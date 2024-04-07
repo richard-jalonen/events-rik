@@ -7,12 +7,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import ApiClient from '@/client/api.client'
-import type { Person } from '@/models/Person'
 import PrivatePersonForm from '@/components/person/PrivatePersonForm.vue'
 import LegalPersonForm from '@/components/person/LegalPersonForm.vue'
 import SubPage from '@/components/common/SubPage.vue'
+import type { Person } from '@/models/Person'
+import ApiClient from '@/client/api.client'
+import { defineComponent } from 'vue'
 
 export default defineComponent({
   components: { SubPage, PrivatePersonForm, LegalPersonForm },

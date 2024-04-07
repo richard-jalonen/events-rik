@@ -15,8 +15,8 @@
           <div class="mb-2">{{ event?.location }}</div>
           <div>
             <EventParticipantsList
-              @participantDeleted="fetchEventData"
               :participants="event?.participants || []"
+              @participant-deleted="fetchEventData"
             />
           </div>
         </div>
@@ -26,11 +26,11 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import ApiClient from '@/client/api.client'
-import type { Event } from '@/models/Event'
-import FormatUtil from '@/util/format.util'
 import EventParticipantsList from '@/components/event/EventParticipantsList.vue'
+import ApiClient from '@/client/api.client'
+import FormatUtil from '@/util/format.util'
+import type { Event } from '@/models/Event'
+import { defineComponent } from 'vue'
 
 export default defineComponent({
   components: { EventParticipantsList },

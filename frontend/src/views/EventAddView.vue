@@ -5,9 +5,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
 import EventAddForm from '@/components/event/EventAddForm.vue'
 import SubPage from '@/components/common/SubPage.vue'
+import { defineComponent } from 'vue'
 
 export default defineComponent({
   components: { SubPage, EventAddForm },

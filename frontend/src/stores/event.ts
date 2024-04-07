@@ -1,6 +1,6 @@
-import { defineStore } from 'pinia'
 import ApiClient from '@/client/api.client'
 import type { Event } from '@/models/Event'
+import { defineStore } from 'pinia'
 
 export const useEventStore = defineStore('event', {
   state: () => ({

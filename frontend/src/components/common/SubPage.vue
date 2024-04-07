@@ -12,8 +12,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
 import SubPageBanner from '@/components/common/SubPageBanner.vue'
+import { defineComponent } from 'vue'
 
 export default defineComponent({
   components: { SubPageBanner },

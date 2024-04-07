@@ -1,17 +1,17 @@
-import { createApp } from 'vue'
 import { createPinia } from 'pinia'
+import { createApp } from 'vue'
 
-import App from './App.vue'
-import router from './router'
-import VueAxios from 'vue-axios'
-import axios from 'axios'
 import createBootstrap from 'bootstrap-vue-next'
+import VueAxios from 'vue-axios'
+import router from './router'
+import App from './App.vue'
+import axios from 'axios'
 
-import ee from '@/assets/messages.ee.json'
-import '@/assets/app.css'
-import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue-next/dist/bootstrap-vue-next.css'
+import ee from '@/assets/messages.ee.json'
+import 'bootstrap/dist/css/bootstrap.css'
 import { createI18n } from 'vue-i18n'
+import '@/assets/app.css'
 
 const app = createApp(App)
 const i18n = createI18n({

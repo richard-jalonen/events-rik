@@ -23,8 +23,8 @@
               :src="removeSvg"
               class="link"
               alt="remove"
-              @load="true"
               style="max-width: 1em"
+              @load="true"
               @click="deleteEvent(event)"
             />
           </div>
@@ -40,11 +40,11 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import type { Event } from '@/models/Event'
-import FormatUtil from '@/util/format.util'
 import removeSvg from '@/assets/images/remove.svg'
 import ApiClient from '@/client/api.client'
+import FormatUtil from '@/util/format.util'
+import type { Event } from '@/models/Event'
+import { defineComponent } from 'vue'
 
 export default defineComponent({
   props: {

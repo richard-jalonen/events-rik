@@ -29,9 +29,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import logoSrc from '@/assets/images/logo.svg'
 import symbolSrc from '@/assets/images/symbol.svg'
+import logoSrc from '@/assets/images/logo.svg'
+import { defineComponent } from 'vue'
 
 export default defineComponent({
   data() {

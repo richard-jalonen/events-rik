@@ -1,6 +1,6 @@
-import axios from 'axios'
-import type { EventCreateRequest } from '@/models/Event'
 import type { PersonCreateRequest, PersonUpdateRequest } from '@/models/Person'
+import type { EventCreateRequest } from '@/models/Event'
+import axios from 'axios'
 
 const apiUrl = import.meta.env.VITE_API_URL
 

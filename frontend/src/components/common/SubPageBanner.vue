@@ -10,8 +10,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
 import eventBanner from '@/assets/images/grass.jpg'
+import { defineComponent } from 'vue'
 
 export default defineComponent({
   props: {

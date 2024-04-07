@@ -7,24 +7,24 @@
         :events="upcomingEvents"
         :translations="translations.ee.home.upcomingEvents"
         can-delete-events
-        @eventDeleted="initialize"
+        @event-deleted="initialize"
       />
       <EventsOverview
         :events="pastEvents"
         class="col"
         :translations="translations.ee.home.pastEvents"
-        @eventDeleted="initialize"
+        @event-deleted="initialize"
       />
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import WelcomeBanner from '@/components/home/WelcomeBanner.vue'
 import EventsOverview from '@/components/home/EventsOverview.vue'
+import WelcomeBanner from '@/components/home/WelcomeBanner.vue'
 import translationsEe from '@/assets/messages.ee.json'
 import { useEventStore } from '@/stores/event'
+import { defineComponent } from 'vue'
 
 export default defineComponent({
   components: { EventsOverview, WelcomeBanner },
@@ -35,9 +35,6 @@ export default defineComponent({
       }
     }
   },
-  created() {
-    this.initialize()
-  },
   computed: {
     upcomingEvents() {
       return useEventStore().getFutureEvents
@@ -45,6 +42,9 @@ export default defineComponent({
     pastEvents() {
       return useEventStore().getPastEvents
     }
+  },
+  created() {
+    this.initialize()
   },
   methods: {
     async initialize() {

@@ -1,6 +1,6 @@
 <template>
   <div v-if="participants.length > 0">
-    <div class="row" v-for="(participant, index) in participants" :key="index">
+    <div v-for="(participant, index) in participants" :key="index" class="row">
       <div class="col-1">{{ index + 1 }}.</div>
       <div class="col-6">{{ participant.firstName }} {{ participant.lastName }}</div>
       <div class="col-4">{{ participant.personCode }}</div>
@@ -17,9 +17,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
 import type { Person } from '@/models/Person'
 import ApiClient from '@/client/api.client'
+import { defineComponent } from 'vue'
 
 export default defineComponent({
   props: {

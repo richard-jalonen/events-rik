@@ -7,10 +7,10 @@
 </template>
 
 <script setup lang="ts">
-import { RouterView } from 'vue-router'
 import AppHeader from '@/components/common/header/AppHeader.vue'
 import AppFooter from '@/components/common/footer/AppFooter.vue'
 import { usePaymentStore } from '@/stores/payment'
+import { RouterView } from 'vue-router'
 
 initialize()
 

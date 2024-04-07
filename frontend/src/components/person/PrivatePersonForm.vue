@@ -5,8 +5,8 @@
         <div class="col-4">{{ $t('personAdd.firstName') }}</div>
         <div class="col">
           <input
-            class="w-100"
             v-model="form.firstName"
+            class="w-100"
             type="text"
             :class="{
               error: v$.form.firstName.$error
@@ -18,8 +18,8 @@
         <div class="col-4">{{ $t('personAdd.lastName') }}</div>
         <div class="col">
           <input
-            class="w-100"
             v-model="form.lastName"
+            class="w-100"
             type="text"
             :class="{
               error: v$.form.lastName.$error
@@ -31,8 +31,8 @@
         <div class="col-4">{{ $t('personAdd.personCode') }}</div>
         <div class="col">
           <input
-            class="w-100"
             v-model="form.personCode"
+            class="w-100"
             type="number"
             :class="{
               error: v$.form.personCode.$error
@@ -44,8 +44,8 @@
         <div class="col-4">{{ $t('personAdd.paymentType') }}</div>
         <div class="col">
           <select
-            class="w-100"
             v-model="form.paymentType"
+            class="w-100"
             :class="{
               error: v$.form.paymentType.$error
             }"
@@ -58,9 +58,9 @@
         <div class="col-4">{{ $t('personAdd.additionalInfo') }}</div>
         <div class="col">
           <textarea
+            v-model="form.additionalInfo"
             :maxlength="maxAdditionalInfoLength"
             class="w-100"
-            v-model="form.additionalInfo"
             type="text"
           />
         </div>
@@ -78,27 +78,29 @@
 </template>
 
 <script lang="ts">
+import { maxLength, minLength, required } from '@vuelidate/validators'
+import type { Person, PersonCreateRequest } from '@/models/Person'
+import { usePaymentStore } from '@/stores/payment'
+import ApiClient from '@/client/api.client'
+import useVuelidate from '@vuelidate/core'
 import { defineComponent } from 'vue'
 import router from '@/router'
-import useVuelidate from '@vuelidate/core'
-import { maxLength, minLength, required } from '@vuelidate/validators'
-import ApiClient from '@/client/api.client'
-import { usePaymentStore } from '@/stores/payment'
-import type { Person, PersonCreateRequest } from '@/models/Person'
 
 export default defineComponent({
-  setup() {
-    return { v$: useVuelidate() }
-  },
   props: {
     eventUuid: {
       type: String,
-      required: false
+      required: false,
+      default: null
     },
     person: {
       type: Object as () => Person,
-      required: false
+      required: false,
+      default: null
     }
+  },
+  setup() {
+    return { v$: useVuelidate() }
   },
   data() {
     return {
@@ -126,6 +128,11 @@ export default defineComponent({
         paymentType: { required },
         additionalInfo: { maxLength: maxLength(this.maxAdditionalInfoLength) }
       }
+    }
+  },
+  computed: {
+    paymentOptions() {
+      return usePaymentStore().getPaymentOptions
     }
   },
   beforeMount() {
@@ -157,11 +164,6 @@ export default defineComponent({
           router.go(-1)
         }
       }
-    }
-  },
-  computed: {
-    paymentOptions() {
-      return usePaymentStore().getPaymentOptions
     }
   }
 })

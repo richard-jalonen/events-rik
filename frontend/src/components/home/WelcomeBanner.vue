@@ -12,8 +12,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
 import welcomeBannerImg from '@/assets/images/main-page-banner.jpg'
+import { defineComponent } from 'vue'
 
 export default defineComponent({
   data() {

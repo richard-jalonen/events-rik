@@ -6,10 +6,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
 import EventParticipants from '@/components/event/EventParticipants.vue'
 import PersonAddForm from '@/components/person/PersonAddForm.vue'
 import SubPage from '@/components/common/SubPage.vue'
+import { defineComponent } from 'vue'
 
 export default defineComponent({
   components: { SubPage, PersonAddForm, EventParticipants },
