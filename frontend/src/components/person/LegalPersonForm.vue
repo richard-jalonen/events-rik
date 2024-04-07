@@ -76,7 +76,7 @@
 import { defineComponent } from 'vue'
 import router from '@/router'
 import useVuelidate from '@vuelidate/core'
-import { required } from '@vuelidate/validators'
+import { maxLength, minLength, required } from '@vuelidate/validators'
 import ApiClient from '@/client/api.client'
 import { usePaymentStore } from '@/stores/payment'
 import type { Person, PersonCreateRequest } from '@/models/Person'
@@ -111,7 +111,11 @@ export default defineComponent({
     return {
       form: {
         companyName: { required },
-        personCode: { required },
+        personCode: {
+          required,
+          min: minLength(8),
+          max: maxLength(8)
+        },
         participantCount: { required },
         paymentType: { required }
       }

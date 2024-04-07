@@ -90,7 +90,7 @@ export default defineComponent({
           location: this.form.eventLocation!,
           additionalInfo: this.form.eventAdditionalInfo
         })
-        await router.push('/')
+        await router.push({ name: 'Home' })
       }
     }
   }
