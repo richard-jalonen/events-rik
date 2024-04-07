@@ -36,4 +36,8 @@ export default class ApiClient {
   public static deleteEvent(uuid: string) {
     return axios.delete(`${apiUrl}/api/v1/events/${uuid}`)
   }
+
+  public static deleteParticipant(uuid: string) {
+    return axios.delete(`${apiUrl}/api/v1/participants/${uuid}`)
+  }
 }

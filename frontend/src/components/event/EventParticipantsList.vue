@@ -8,7 +8,9 @@
         <router-link :to="{ path: `/person/${participant.uuid}` }">
           <span class="text-sm text-dark-gray me-2">{{ $t('eventEdit.buttons.view') }}</span>
         </router-link>
-        <span class="text-sm text-dark-gray">{{ $t('eventEdit.buttons.delete') }}</span>
+        <span class="text-sm text-dark-gray link" @click="deleteParticipant(participant.uuid)">{{
+          $t('eventEdit.buttons.delete')
+        }}</span>
       </div>
     </div>
   </div>
@@ -17,6 +19,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import type { Person } from '@/models/Person'
+import ApiClient from '@/client/api.client'
 
 export default defineComponent({
   props: {
@@ -27,6 +30,16 @@ export default defineComponent({
   },
   data() {
     return {}
+  },
+  methods: {
+    async deleteParticipant(participantUuid: string) {
+      try {
+        await ApiClient.deleteParticipant(participantUuid)
+        this.$emit('participantDeleted')
+      } catch (error) {
+        console.error('Error deleting participant:', error)
+      }
+    }
   }
 })
 </script>

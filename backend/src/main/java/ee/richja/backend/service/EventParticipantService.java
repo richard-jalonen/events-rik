@@ -8,6 +8,7 @@ import ee.richja.backend.repository.EventParticipantRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -45,6 +46,17 @@ public class EventParticipantService {
         }
         if (!paymentProperties.getTypes().contains(request.getPaymentType())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid payment type");
+        }
+    }
+
+    public boolean delete(UUID uuid) {
+        log.info("Deleting participant-{} ", uuid);
+        try {
+            eventParticipantRepository.deleteById(uuid);
+            return true;
+        } catch (EmptyResultDataAccessException ex) {
+            log.warn("Participant with UUID {} not found", uuid);
+            return false;
         }
     }
 

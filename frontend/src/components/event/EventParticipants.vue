@@ -13,7 +13,12 @@
           <div class="mb-2">{{ event?.name }}</div>
           <div class="mb-2">{{ FormatUtil.formatDate(event?.time) }}</div>
           <div class="mb-2">{{ event?.location }}</div>
-          <div><EventParticipantsList :participants="event?.participants || []" /></div>
+          <div>
+            <EventParticipantsList
+              @participantDeleted="fetchEventData"
+              :participants="event?.participants || []"
+            />
+          </div>
         </div>
       </div>
     </div>

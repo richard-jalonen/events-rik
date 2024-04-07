@@ -38,4 +38,14 @@ public class ParticipantController {
         eventParticipantService.update(request);
         return ResponseEntity.noContent().build();
     }
+
+    @DeleteMapping("/{uuid}")
+    public ResponseEntity<Void> deleteParticipant(@PathVariable UUID uuid) {
+        if (eventParticipantService.delete(uuid)) {
+            log.info("Deleted participant-{}", uuid);
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 }
