@@ -17,10 +17,6 @@ const router = createRouter({
       component: () => import('../views/EventEditView.vue')
     },
     {
-      path: '/person',
-      component: () => import('../views/PersonAddView.vue')
-    },
-    {
       path: '/person/:id',
       component: () => import('../views/PersonEditView.vue')
     }

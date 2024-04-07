@@ -3,7 +3,7 @@
     <div class="grid">
       <div class="row mb-2">
         <div class="col-4">{{ $t('personAdd.firstName') }}</div>
-        <div class="col-4">
+        <div class="col">
           <input
             class="w-100"
             v-model="form.firstName"
@@ -16,7 +16,7 @@
       </div>
       <div class="row mb-2">
         <div class="col-4">{{ $t('personAdd.lastName') }}</div>
-        <div class="col-4">
+        <div class="col">
           <input
             class="w-100"
             v-model="form.lastName"
@@ -29,7 +29,7 @@
       </div>
       <div class="row mb-2">
         <div class="col-4">{{ $t('personAdd.personCode') }}</div>
-        <div class="col-4">
+        <div class="col">
           <input
             class="w-100"
             v-model="form.personCode"
@@ -42,7 +42,7 @@
       </div>
       <div class="row mb-3">
         <div class="col-4">{{ $t('personAdd.paymentType') }}</div>
-        <div class="col-4">
+        <div class="col">
           <select
             class="w-100"
             v-model="form.paymentType"
@@ -56,7 +56,7 @@
       </div>
       <div class="row mb-2">
         <div class="col-4">{{ $t('personAdd.additionalInfo') }}</div>
-        <div class="col-4">
+        <div class="col">
           <textarea class="w-100" v-model="form.additionalInfo" type="text" />
         </div>
       </div>

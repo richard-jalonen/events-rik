@@ -1,17 +1,16 @@
 <template>
-  <div class="bg-light">
-    <SubPageBanner :header="$t('eventAdd.header')" />
+  <SubPage :banner-header="$t('eventAdd.header')">
     <EventAddForm />
-  </div>
+  </SubPage>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 import EventAddForm from '@/components/event/EventAddForm.vue'
-import SubPageBanner from '@/components/common/SubPageBanner.vue'
+import SubPage from '@/components/common/SubPage.vue'
 
 export default defineComponent({
-  components: { SubPageBanner, EventAddForm },
+  components: { SubPage, EventAddForm },
   data() {
     return {}
   }
