@@ -110,7 +110,7 @@ export default defineComponent({
         paymentType: null as string | null,
         additionalInfo: ''
       },
-      maxAdditionalInfoLength: 2
+      maxAdditionalInfoLength: 5000
     }
   },
   validations() {

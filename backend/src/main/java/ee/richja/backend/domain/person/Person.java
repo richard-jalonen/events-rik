@@ -23,7 +23,6 @@ public abstract class Person extends AggregateRoot {
     private String paymentType;
     @NotEmpty
     @Size(min = 8, max = 11)
-    @Column(unique = true)
     private String personCode;
     @Column(length = 5000)
     private String additionalInfo;

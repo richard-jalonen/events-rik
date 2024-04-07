@@ -27,14 +27,22 @@ public class PersonService {
 
     public Person create(PersonCreateRequest request) {
         log.info("Creating person");
+        validateRequest(request);
+        Person createdPerson = createPerson(request);
+        log.info("Person {} created", createdPerson.getUuid());
+        return createdPerson;
+    }
+
+    private void validateRequest(PersonCreateRequest request) {
         if (request.getType() == null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Person type cannot be null");
         }
-        if (paymentProperties.getTypes().stream()
-                .noneMatch(type -> type.equalsIgnoreCase(request.getPaymentType()))) {
+        if (!paymentProperties.getTypes().contains(request.getPaymentType())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid payment type");
         }
+    }
 
+    private Person createPerson(PersonCreateRequest request) {
         Person person;
         if (request.getType().equalsIgnoreCase("LEGAL")) {
             person = getLegalPerson(request);
@@ -43,9 +51,7 @@ public class PersonService {
         } else {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Unknown person type: " + request.getType());
         }
-        Person createdPerson = personRepository.save(person);
-        log.info("Person {} created", createdPerson.getUuid());
-        return createdPerson;
+        return personRepository.save(person);
     }
 
     private static PrivatePerson getPrivatePerson(PersonCreateRequest request) {
@@ -79,12 +85,13 @@ public class PersonService {
         return personRepository.findById(uuid).orElse(null);
     }
 
-    public void update(PersonUpdateRequest request) {
+    public Person update(PersonUpdateRequest request) {
         log.info("Updating person-{}", request.getUuid());
         Person person = personRepository.findById(request.getUuid()).orElseThrow(() ->
                 new ResponseStatusException(HttpStatus.NOT_FOUND, "Person not found"));
         BeanUtils.copyProperties(request, person);
         personRepository.save(person);
         log.info("Person-{} updated", person.getUuid());
+        return person;
     }
 }

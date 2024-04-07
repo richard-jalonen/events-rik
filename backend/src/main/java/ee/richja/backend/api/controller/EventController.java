@@ -9,9 +9,11 @@ import ee.richja.backend.service.EventService;
 import ee.richja.backend.service.PersonService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
@@ -64,8 +66,13 @@ public class EventController {
 
     @PostMapping("/{uuid}/participants")
     public ResponseEntity<Void> addParticipant(@PathVariable UUID uuid, @RequestBody PersonCreateRequest request) {
+        if (!eventService.existsEventByUuid(uuid)) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Event not found with UUID: " + uuid);
+        }
+
         Person person = personService.create(request);
         eventService.addPersonToEvent(uuid, person);
+
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .build()

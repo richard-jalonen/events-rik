@@ -62,4 +62,8 @@ public class EventService {
             return false;
         }
     }
+
+    public boolean existsEventByUuid(UUID uuid) {
+        return eventRepository.existsById(uuid);
+    }
 }
