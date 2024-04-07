@@ -1,23 +1,17 @@
-FROM openjdk:21-jdk-slim AS builder
+FROM gradle:8.7.0 AS builder
 
-WORKDIR /app
+COPY --chown=gradle:gradle . /home/gradle/src
 
-COPY gradlew .
-RUN chmod +x gradlew
-COPY gradle gradle
-COPY settings.gradle .
-COPY build.gradle .
+WORKDIR /home/gradle/src
 
-RUN ./gradlew --version
-RUN ./gradlew clean build
+RUN gradle build --no-daemon
 
-COPY . .
 FROM openjdk:21-jdk-slim
-
-WORKDIR /app
-
-COPY --from=builder /app/build/libs/backend-0.0.1-SNAPSHOT.jar /app/backend.jar
 
 EXPOSE 8080
 
-CMD ["java", "-jar", "backend.jar"]
+RUN mkdir /app
+
+COPY --from=builder /home/gradle/src/build/libs/*.jar /app/backend.jar
+
+CMD ["java", "-jar", "/app/backend.jar"]

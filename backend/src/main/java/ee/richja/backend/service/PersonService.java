@@ -37,27 +37,41 @@ public class PersonService {
 
         Person person;
         if (request.getType().equalsIgnoreCase("LEGAL")) {
-            LegalPerson legalPerson = new LegalPerson();
-            legalPerson.setFirstName(request.getFirstName());
-            legalPerson.setPersonCode(request.getPersonCode());
-            legalPerson.setParticipantCount(request.getParticipantCount());
-            legalPerson.setPaymentType(request.getPaymentType());
-            legalPerson.setAdditionalInfo(request.getAdditionalInfo());
-            person = legalPerson;
+            person = getLegalPerson(request);
         } else if (request.getType().equalsIgnoreCase("PRIVATE")) {
-            PrivatePerson privatePerson = new PrivatePerson();
-            privatePerson.setFirstName(request.getFirstName());
-            privatePerson.setLastName(request.getLastName());
-            privatePerson.setPersonCode(request.getPersonCode());
-            privatePerson.setPaymentType(request.getPaymentType());
-            privatePerson.setAdditionalInfo(request.getAdditionalInfo());
-            person = privatePerson;
+            person = getPrivatePerson(request);
         } else {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Unknown person type: " + request.getType());
         }
         Person createdPerson = personRepository.save(person);
         log.info("Person {} created", createdPerson.getUuid());
         return createdPerson;
+    }
+
+    private static PrivatePerson getPrivatePerson(PersonCreateRequest request) {
+        PrivatePerson privatePerson = new PrivatePerson();
+        privatePerson.setFirstName(request.getFirstName());
+        privatePerson.setLastName(request.getLastName());
+        if (request.getPersonCode().length() != 11) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Code must be 11 digits");
+        }
+        privatePerson.setPersonCode(request.getPersonCode());
+        privatePerson.setPaymentType(request.getPaymentType());
+        privatePerson.setAdditionalInfo(request.getAdditionalInfo());
+        return privatePerson;
+    }
+
+    private static LegalPerson getLegalPerson(PersonCreateRequest request) {
+        LegalPerson legalPerson = new LegalPerson();
+        legalPerson.setFirstName(request.getFirstName());
+        if (request.getPersonCode().length() != 8) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Code must be 8 digits");
+        }
+        legalPerson.setPersonCode(request.getPersonCode());
+        legalPerson.setParticipantCount(request.getParticipantCount());
+        legalPerson.setPaymentType(request.getPaymentType());
+        legalPerson.setAdditionalInfo(request.getAdditionalInfo());
+        return legalPerson;
     }
 
     public Person getPersonByUuid(UUID uuid) {
