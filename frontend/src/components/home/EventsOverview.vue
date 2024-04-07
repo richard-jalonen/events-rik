@@ -21,9 +21,11 @@
             <img
               v-if="canDeleteEvents"
               :src="removeSvg"
+              class="link"
               alt="remove"
               @load="true"
               style="max-width: 1em"
+              @click="deleteEvent(event)"
             />
           </div>
         </div>
@@ -42,6 +44,7 @@ import { defineComponent } from 'vue'
 import type { Event } from '@/models/Event'
 import FormatUtil from '@/util/format.util'
 import removeSvg from '@/assets/images/remove.svg'
+import ApiClient from '@/client/api.client'
 
 export default defineComponent({
   props: {
@@ -62,6 +65,16 @@ export default defineComponent({
     return {
       FormatUtil,
       removeSvg
+    }
+  },
+  methods: {
+    async deleteEvent(event: Event) {
+      try {
+        await ApiClient.deleteEvent(event.uuid)
+        this.$emit('eventDeleted')
+      } catch (error) {
+        console.error('Error deleting event:', error)
+      }
     }
   }
 })

@@ -32,4 +32,8 @@ export default class ApiClient {
   public static updatePerson(request: PersonUpdateRequest) {
     return axios.put(`${apiUrl}/api/v1/persons`, request)
   }
+
+  public static deleteEvent(uuid: string) {
+    return axios.delete(`${apiUrl}/api/v1/events/${uuid}`)
+  }
 }

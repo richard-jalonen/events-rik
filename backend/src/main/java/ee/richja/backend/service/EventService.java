@@ -7,6 +7,7 @@ import ee.richja.backend.repository.EventRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -49,5 +50,16 @@ public class EventService {
         event.addParticipant(person);
         eventRepository.save(event);
         log.info("Person-{} added", person.getUuid());
+    }
+
+    public boolean delete(UUID uuid) {
+        log.info("Deleting event-{} ", uuid);
+        try {
+            eventRepository.deleteById(uuid);
+            return true;
+        } catch (EmptyResultDataAccessException ex) {
+            log.warn("Event with UUID {} not found", uuid);
+            return false;
+        }
     }
 }

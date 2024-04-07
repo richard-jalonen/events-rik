@@ -7,11 +7,13 @@
         :events="upcomingEvents"
         :translations="translations.ee.home.upcomingEvents"
         can-delete-events
+        @eventDeleted="initialize"
       />
       <EventsOverview
         :events="pastEvents"
         class="col"
         :translations="translations.ee.home.pastEvents"
+        @eventDeleted="initialize"
       />
     </div>
   </div>
@@ -33,8 +35,8 @@ export default defineComponent({
       }
     }
   },
-  beforeMount() {
-    useEventStore().initialize()
+  created() {
+    this.initialize()
   },
   computed: {
     upcomingEvents() {
@@ -42,6 +44,11 @@ export default defineComponent({
     },
     pastEvents() {
       return useEventStore().getPastEvents
+    }
+  },
+  methods: {
+    async initialize() {
+      await useEventStore().initialize()
     }
   }
 })

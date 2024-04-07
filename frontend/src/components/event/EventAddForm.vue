@@ -55,14 +55,20 @@ import ApiClient from '@/client/api.client'
 import { required } from '@vuelidate/validators'
 import useVuelidate from '@vuelidate/core'
 import router from '@/router'
+import FormatUtil from '@/util/format.util'
+
+const isFutureTime = (value: string) => {
+  return FormatUtil.isFutureTime(value)
+}
 
 export default defineComponent({
   setup() {
-    return { v$: useVuelidate() }
+    return { v$: useVuelidate(), isFutureTime }
   },
   data() {
     return {
       router,
+      FormatUtil,
       form: {
         eventName: null,
         eventTime: null,
@@ -75,7 +81,10 @@ export default defineComponent({
     return {
       form: {
         eventName: { required },
-        eventTime: { required },
+        eventTime: {
+          required,
+          isFutureTime
+        },
         eventLocation: { required }
       }
     }

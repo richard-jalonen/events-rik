@@ -53,3 +53,7 @@ a:hover {
 .text-sm {
   font-size: 0.75rem;
 }
+
+.link {
+  cursor: pointer;
+}

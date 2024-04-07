@@ -72,4 +72,14 @@ public class EventController {
                 .toUri();
         return ResponseEntity.created(location).build();
     }
+
+    @DeleteMapping("/{uuid}")
+    public ResponseEntity<Void> deleteEvent(@PathVariable UUID uuid) {
+        if (eventService.delete(uuid)) {
+            log.info("Deleted event with UUID: {}", uuid);
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 }

@@ -18,12 +18,15 @@ public abstract class Person extends AggregateRoot {
     @GeneratedValue
     private UUID uuid;
     @NotEmpty
+    private String firstName;
+    @NotEmpty
     private String paymentType;
     @NotEmpty
     @Size(min = 8, max = 11)
+    @Column(unique = true)
     private String personCode;
-
-    public abstract String getName();
+    @Column(length = 5000)
+    private String additionalInfo;
 
     @Override
     @PrePersist

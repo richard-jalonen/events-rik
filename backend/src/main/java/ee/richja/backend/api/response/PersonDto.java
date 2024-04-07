@@ -23,22 +23,17 @@ public class PersonDto {
     public static PersonDto createDto(Person person) {
         PersonDto personDto = new PersonDto();
         personDto.setUuid(person.getUuid());
+        personDto.setFirstName(person.getFirstName());
+        personDto.setPersonCode(person.getPersonCode());
         personDto.setPaymentType(person.getPaymentType());
+        personDto.setAdditionalInfo(person.getAdditionalInfo());
         if (person instanceof PrivatePerson privatePerson) {
             personDto.setType("PRIVATE");
-            personDto.setUuid(person.getUuid());
-            personDto.setPaymentType(person.getPaymentType());
-            personDto.setFirstName(privatePerson.getFirstName());
             personDto.setLastName(privatePerson.getLastName());
-            personDto.setPersonCode(privatePerson.getPersonCode());
-            personDto.setAdditionalInfo(privatePerson.getAdditionalInfo());
         } else {
             LegalPerson legalPerson = (LegalPerson) person;
             personDto.setType("LEGAL");
-            personDto.setFirstName(legalPerson.getFirstName());
-            personDto.setPersonCode(legalPerson.getPersonCode());
             personDto.setParticipantCount(legalPerson.getParticipantCount());
-            personDto.setAdditionalInfo(legalPerson.getAdditionalInfo());
         }
         return personDto;
     }

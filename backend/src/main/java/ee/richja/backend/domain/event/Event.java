@@ -31,8 +31,13 @@ public class Event extends AggregateRoot {
     private Long participantCount;
     @Column(length = 1000)
     private String additionalInfo;
-    @ElementCollection
-    @CollectionTable(name = "event_participant", joinColumns = @JoinColumn(name = "event_uuid"))
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "event_participant",
+            joinColumns = @JoinColumn(name = "event_uuid"),
+            inverseJoinColumns = @JoinColumn(name = "person_uuid")
+    )
     private Set<Person> participants;
 
     public void addParticipant(Person person) {

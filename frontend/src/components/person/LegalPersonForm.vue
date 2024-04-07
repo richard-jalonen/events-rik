@@ -57,7 +57,12 @@
       <div class="row mb-2">
         <div class="col-4">{{ $t('personAdd.additionalInfo') }}</div>
         <div class="col">
-          <textarea class="w-100" v-model="form.additionalInfo" type="text" />
+          <textarea
+            :maxlength="maxAdditionalInfoLength"
+            class="w-100"
+            v-model="form.additionalInfo"
+            type="text"
+          />
         </div>
       </div>
     </div>
@@ -104,7 +109,8 @@ export default defineComponent({
         participantCount: null as number | null,
         paymentType: null as string | null,
         additionalInfo: ''
-      }
+      },
+      maxAdditionalInfoLength: 2
     }
   },
   validations() {
@@ -117,7 +123,8 @@ export default defineComponent({
           max: maxLength(8)
         },
         participantCount: { required },
-        paymentType: { required }
+        paymentType: { required },
+        additionalInfo: { maxLength: maxLength(this.maxAdditionalInfoLength) }
       }
     }
   },
