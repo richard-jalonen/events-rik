@@ -46,11 +46,13 @@
     "upcomingEvents": {
       "header": "Tulevased üritused",
       "participants": "OSAVÕTJAD",
-      "addEvent": "LISA ÜRITUS"
+      "addEvent": "LISA ÜRITUS",
+      "missing": "Tulevased üritused puuduvad"
     },
     "pastEvents": {
       "header": "Toimunud üritused",
-      "participants": "OSAVÕTJAD"
+      "participants": "OSAVÕTJAD",
+      "missing": "Toimunud üritused puuduvad"
     }
   },
   "eventAdd": {

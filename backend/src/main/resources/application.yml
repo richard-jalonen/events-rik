@@ -8,7 +8,7 @@ spring:
   jpa:
     properties:
       hibernate:
-        dialect:PostgreSQLDialect
+        dialect: org.hibernate.dialect.PostgreSQLDialect
   mvc:
     log-resolved-exception: true
 

@@ -2,7 +2,10 @@
   <div class="bg-light">
     <h4 class="bg-blue text-light text-center fw-lighter py-3">{{ translations.header }}</h4>
     <div class="p-3">
-      <div>
+      <div v-if="events.length == 0">
+        {{ translations.missing }}
+      </div>
+      <div v-else>
         <div v-for="(event, index) of events" :key="event.uuid" class="row">
           <div class="col-1">{{ index + 1 }}.</div>
           <div class="col">

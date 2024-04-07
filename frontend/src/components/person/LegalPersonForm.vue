@@ -139,7 +139,7 @@ export default defineComponent({
           additionalInfo: this.form.additionalInfo
         }
         if (!this.person) {
-          await ApiClient.createPerson(this.eventUuid, request)
+          await ApiClient.createPerson(this.eventUuid!, request)
           router.go(0)
         } else {
           await ApiClient.updatePerson({ ...request, uuid: this.person.uuid })
