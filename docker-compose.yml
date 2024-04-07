@@ -40,7 +40,12 @@ services:
       POSTGRES_DB: events_rik
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: root
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
 
 networks:
   app-network:
     driver: bridge
+
+volumes:
+  postgres-data:
