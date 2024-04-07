@@ -30,7 +30,7 @@ export const useEventStore = defineStore('event', {
     async fetchEvents() {
       try {
         const data = await ApiClient.getEvents()
-        this.events = data.data
+        this.events = data.data || []
       } catch (error) {
         console.log(error)
       }
