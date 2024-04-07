@@ -14,7 +14,7 @@ public class EventDto {
     private String name;
     private String time;
     private String location;
-    private Set<PersonDto> participants;
+    private Set<EventParticipantDto> participants;
 
     public static EventDto createDto(Event event) {
         EventDto eventDto = new EventDto();
@@ -22,7 +22,7 @@ public class EventDto {
         eventDto.setName(event.getName());
         eventDto.setTime(event.getTime().toString());
         eventDto.setLocation(event.getLocation());
-        eventDto.setParticipants(PersonDto.createDtoSet(event.getParticipants()));
+        eventDto.setParticipants(EventParticipantDto.createDtoSet(event.getEventParticipants()));
         return eventDto;
     }
 

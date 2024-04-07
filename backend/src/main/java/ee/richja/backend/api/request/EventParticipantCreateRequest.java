@@ -3,7 +3,7 @@ package ee.richja.backend.api.request;
 import lombok.Data;
 
 @Data
-public class PersonCreateRequest {
+public class EventParticipantCreateRequest {
     private String type;
     private String firstName;
     private String lastName;

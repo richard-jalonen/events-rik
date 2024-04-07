@@ -7,6 +7,6 @@ import java.util.UUID;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class PersonUpdateRequest extends PersonCreateRequest {
+public class EventParticipantUpdateRequest extends EventParticipantCreateRequest {
     private UUID uuid;
 }

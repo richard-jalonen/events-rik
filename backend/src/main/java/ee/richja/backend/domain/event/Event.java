@@ -2,7 +2,6 @@ package ee.richja.backend.domain.event;
 
 
 import ee.richja.backend.domain.AggregateRoot;
-import ee.richja.backend.domain.person.Person;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.NotEmpty;
@@ -11,6 +10,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
@@ -32,15 +32,11 @@ public class Event extends AggregateRoot {
     @Column(length = 1000)
     private String additionalInfo;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "event_participant",
-            joinColumns = @JoinColumn(name = "event_uuid"),
-            inverseJoinColumns = @JoinColumn(name = "person_uuid")
-    )
-    private Set<Person> participants;
+    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL)
+    private Set<EventParticipant> eventParticipants = new HashSet<>();
 
-    public void addParticipant(Person person) {
-        participants.add(person);
+    public void addParticipant(EventParticipant eventParticipant) {
+        eventParticipants.add(eventParticipant);
+        eventParticipant.setEvent(this);
     }
 }

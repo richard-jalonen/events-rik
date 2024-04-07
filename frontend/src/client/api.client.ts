@@ -26,11 +26,11 @@ export default class ApiClient {
   }
 
   public static getPerson(uuid: string) {
-    return axios.get(`${apiUrl}/api/v1/persons/${uuid}`)
+    return axios.get(`${apiUrl}/api/v1/participants/${uuid}`)
   }
 
   public static updatePerson(request: PersonUpdateRequest) {
-    return axios.put(`${apiUrl}/api/v1/persons`, request)
+    return axios.put(`${apiUrl}/api/v1/participants`, request)
   }
 
   public static deleteEvent(uuid: string) {

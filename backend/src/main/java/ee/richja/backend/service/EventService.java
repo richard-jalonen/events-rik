@@ -2,11 +2,12 @@ package ee.richja.backend.service;
 
 import ee.richja.backend.api.request.EventCreateRequest;
 import ee.richja.backend.domain.event.Event;
-import ee.richja.backend.domain.person.Person;
+import ee.richja.backend.domain.event.EventParticipant;
 import ee.richja.backend.repository.EventRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -25,10 +26,7 @@ public class EventService {
     public UUID create(EventCreateRequest request) {
         log.info("Creating event");
         Event event = new Event();
-        event.setName(request.getName());
-        event.setTime(request.getTime());
-        event.setLocation(request.getLocation());
-        event.setAdditionalInfo(request.getAdditionalInfo());
+        BeanUtils.copyProperties(request, event);
         Event createdEvent = eventRepository.save(event);
         log.info("Event {} created", createdEvent.getUuid());
         return createdEvent.getUuid();
@@ -44,12 +42,12 @@ public class EventService {
         return eventRepository.findAll();
     }
 
-    public void addPersonToEvent(UUID eventUuid, Person person) {
-        log.info("Adding person-{} to event-{}", person.getUuid(), eventUuid);
+    public void addParticipantToEvent(UUID eventUuid, EventParticipant eventParticipant) {
+        log.info("Adding participant to event-{}", eventUuid);
         Event event = eventRepository.findById(eventUuid).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Event not found"));
-        event.addParticipant(person);
+        event.addParticipant(eventParticipant);
         eventRepository.save(event);
-        log.info("Person-{} added", person.getUuid());
+        log.info("Participant-{}", eventParticipant.getPerson().getUuid());
     }
 
     public boolean delete(UUID uuid) {

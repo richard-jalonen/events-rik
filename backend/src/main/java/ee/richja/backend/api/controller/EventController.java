@@ -1,12 +1,12 @@
 package ee.richja.backend.api.controller;
 
 import ee.richja.backend.api.request.EventCreateRequest;
-import ee.richja.backend.api.request.PersonCreateRequest;
+import ee.richja.backend.api.request.EventParticipantCreateRequest;
 import ee.richja.backend.api.response.EventDto;
 import ee.richja.backend.domain.event.Event;
-import ee.richja.backend.domain.person.Person;
+import ee.richja.backend.domain.event.EventParticipant;
+import ee.richja.backend.service.EventParticipantService;
 import ee.richja.backend.service.EventService;
-import ee.richja.backend.service.PersonService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -29,17 +29,17 @@ import static ee.richja.backend.api.response.EventDto.createDtoList;
 @RequiredArgsConstructor
 public class EventController {
     private final EventService eventService;
-    private final PersonService personService;
+    private final EventParticipantService eventParticipantService;
 
-    @PostMapping
-    public ResponseEntity<Void> createEvent(@RequestBody EventCreateRequest request) {
-        UUID eventUuid = eventService.create(request);
-        URI location = ServletUriComponentsBuilder
-                .fromCurrentRequest()
-                .path("/{uuid}")
-                .buildAndExpand(eventUuid)
-                .toUri();
-        return ResponseEntity.created(location).build();
+    @GetMapping
+    public ResponseEntity<List<EventDto>> getAllEvents() {
+        List<Event> events = eventService.getAllEvents();
+        if (!events.isEmpty()) {
+            log.info("Returning {} events", events.size());
+            return ResponseEntity.ok(createDtoList(events));
+        } else {
+            return ResponseEntity.noContent().build();
+        }
     }
 
     @GetMapping("/{uuid}")
@@ -53,25 +53,25 @@ public class EventController {
         }
     }
 
-    @GetMapping
-    public ResponseEntity<List<EventDto>> getAllEvents() {
-        List<Event> events = eventService.getAllEvents();
-        if (!events.isEmpty()) {
-            log.info("Returning {} events", events.size());
-            return ResponseEntity.ok(createDtoList(events));
-        } else {
-            return ResponseEntity.noContent().build();
-        }
+    @PostMapping
+    public ResponseEntity<Void> createEvent(@RequestBody EventCreateRequest request) {
+        UUID eventUuid = eventService.create(request);
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{uuid}")
+                .buildAndExpand(eventUuid)
+                .toUri();
+        return ResponseEntity.created(location).build();
     }
 
     @PostMapping("/{uuid}/participants")
-    public ResponseEntity<Void> addParticipant(@PathVariable UUID uuid, @RequestBody PersonCreateRequest request) {
+    public ResponseEntity<Void> addParticipant(@PathVariable UUID uuid, @RequestBody EventParticipantCreateRequest request) {
         if (!eventService.existsEventByUuid(uuid)) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Event not found with UUID: " + uuid);
         }
 
-        Person person = personService.create(request);
-        eventService.addPersonToEvent(uuid, person);
+        EventParticipant eventParticipant = eventParticipantService.createEventParticipant(request);
+        eventService.addParticipantToEvent(uuid, eventParticipant);
 
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
