@@ -1,7 +1,6 @@
 package ee.richja.backend.api.response;
 
 import ee.richja.backend.domain.event.EventParticipant;
-import ee.richja.backend.domain.person.LegalPerson;
 import ee.richja.backend.domain.person.PrivatePerson;
 import lombok.Data;
 
@@ -26,14 +25,13 @@ public class EventParticipantDto {
         eventParticipantDto.setFirstName(eventParticipant.getPerson().getFirstName());
         eventParticipantDto.setPersonCode(eventParticipant.getPerson().getPersonCode());
         eventParticipantDto.setPaymentType(eventParticipant.getPaymentType());
+        eventParticipantDto.setParticipantCount(eventParticipant.getParticipantCount());
         eventParticipantDto.setAdditionalInfo(eventParticipant.getAdditionalInfo());
         if (eventParticipant.getPerson() instanceof PrivatePerson privatePerson) {
             eventParticipantDto.setType("PRIVATE");
             eventParticipantDto.setLastName(privatePerson.getLastName());
         } else {
-            LegalPerson legalPerson = (LegalPerson) eventParticipant.getPerson();
             eventParticipantDto.setType("LEGAL");
-            eventParticipantDto.setParticipantCount(legalPerson.getParticipantCount());
         }
         return eventParticipantDto;
     }

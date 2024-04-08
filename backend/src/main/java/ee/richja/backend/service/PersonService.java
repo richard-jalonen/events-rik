@@ -68,7 +68,6 @@ public class PersonService {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Code must be 8 digits");
         }
         legalPerson.setPersonCode(request.getPersonCode());
-        legalPerson.setParticipantCount(request.getParticipantCount());
         return legalPerson;
     }
 

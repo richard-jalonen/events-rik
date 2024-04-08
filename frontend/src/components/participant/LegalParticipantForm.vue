@@ -2,7 +2,7 @@
   <div>
     <div class="grid">
       <div class="row mb-2">
-        <div class="col-4">{{ $t('personAdd.companyName') }}</div>
+        <div class="col-4">{{ $t('participantAdd.companyName') }}</div>
         <div class="col">
           <input
             v-model="form.companyName"
@@ -15,7 +15,7 @@
         </div>
       </div>
       <div class="row mb-2">
-        <div class="col-4">{{ $t('personAdd.companyCode') }}</div>
+        <div class="col-4">{{ $t('participantAdd.companyCode') }}</div>
         <div class="col">
           <input
             v-model="form.personCode"
@@ -28,7 +28,7 @@
         </div>
       </div>
       <div class="row mb-2">
-        <div class="col-4">{{ $t('personAdd.participantCount') }}</div>
+        <div class="col-4">{{ $t('participantAdd.participantCount') }}</div>
         <div class="col">
           <input
             v-model="form.participantCount"
@@ -41,7 +41,7 @@
         </div>
       </div>
       <div class="row mb-3">
-        <div class="col-4">{{ $t('personAdd.paymentType') }}</div>
+        <div class="col-4">{{ $t('participantAdd.paymentType') }}</div>
         <div class="col">
           <select
             v-model="form.paymentType"
@@ -55,7 +55,7 @@
         </div>
       </div>
       <div class="row mb-2">
-        <div class="col-4">{{ $t('personAdd.additionalInfo') }}</div>
+        <div class="col-4">{{ $t('participantAdd.additionalInfo') }}</div>
         <div class="col">
           <textarea
             v-model="form.additionalInfo"
@@ -68,18 +68,18 @@
     </div>
     <div class="d-flex gap-2 mt-4">
       <button type="button" class="btn btn-secondary btn-sm" @click="router.go(-1)">
-        {{ $t('personAdd.buttons.back') }}
+        {{ $t('participantAdd.buttons.back') }}
       </button>
-      <button type="button" class="btn btn-primary btn-sm" @click="addPerson">
-        {{ $t('personAdd.buttons.save') }}
+      <button type="button" class="btn btn-primary btn-sm" @click="addParticipant">
+        {{ $t('participantAdd.buttons.save') }}
       </button>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { maxLength, minLength, required } from '@vuelidate/validators'
-import type { Person, PersonCreateRequest } from '@/models/Person'
+import type { Participant, ParticipantCreateRequest } from '@/models/Participant'
+import { maxLength, minLength, minValue, required } from '@vuelidate/validators'
 import { usePaymentStore } from '@/stores/payment'
 import ApiClient from '@/client/api.client'
 import useVuelidate from '@vuelidate/core'
@@ -93,8 +93,8 @@ export default defineComponent({
       required: false,
       default: null
     },
-    person: {
-      type: Object as () => Person,
+    participant: {
+      type: Object as () => Participant,
       required: false,
       default: null
     }
@@ -124,7 +124,10 @@ export default defineComponent({
           min: minLength(8),
           max: maxLength(8)
         },
-        participantCount: { required },
+        participantCount: {
+          required,
+          min: minValue(1)
+        },
         paymentType: { required },
         additionalInfo: { maxLength: maxLength(this.maxAdditionalInfoLength) }
       }
@@ -136,19 +139,19 @@ export default defineComponent({
     }
   },
   beforeMount() {
-    if (this.person) {
-      this.form.companyName = this.person.firstName
-      this.form.personCode = this.person.personCode
-      this.form.participantCount = this.person.participantCount
-      this.form.paymentType = this.person.paymentType
-      this.form.additionalInfo = this.person.additionalInfo
+    if (this.participant) {
+      this.form.companyName = this.participant.firstName
+      this.form.personCode = this.participant.personCode
+      this.form.participantCount = this.participant.participantCount
+      this.form.paymentType = this.participant.paymentType
+      this.form.additionalInfo = this.participant.additionalInfo
     }
   },
   methods: {
-    async addPerson() {
+    async addParticipant() {
       const isValid = await this.v$.$validate()
       if (isValid) {
-        const request: PersonCreateRequest = {
+        const request: ParticipantCreateRequest = {
           type: 'LEGAL',
           firstName: this.form.companyName!,
           personCode: this.form.personCode!,
@@ -156,11 +159,11 @@ export default defineComponent({
           paymentType: this.form.paymentType!,
           additionalInfo: this.form.additionalInfo
         }
-        if (!this.person) {
-          await ApiClient.createPerson(this.eventUuid!, request)
+        if (!this.participant) {
+          await ApiClient.createParticipant(this.eventUuid!, request)
           router.go(0)
         } else {
-          await ApiClient.updatePerson({ ...request, uuid: this.person.uuid })
+          await ApiClient.updateParticipant({ ...request, uuid: this.participant.uuid })
           router.go(-1)
         }
       }

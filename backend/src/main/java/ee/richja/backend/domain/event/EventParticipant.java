@@ -2,6 +2,7 @@ package ee.richja.backend.domain.event;
 
 import ee.richja.backend.domain.person.Person;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -19,6 +20,8 @@ public class EventParticipant {
     private String paymentType;
     @Column(length = 5000)
     private String additionalInfo;
+    @Min(0)
+    private Long participantCount;
 
     @ManyToOne
     @JoinColumn(name = "person_uuid")

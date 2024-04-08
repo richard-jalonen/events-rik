@@ -1,4 +1,4 @@
-export interface Person {
+export interface Participant {
   uuid: string
   type: string
   paymentType: string
@@ -9,7 +9,7 @@ export interface Person {
   additionalInfo: string
 }
 
-export interface PersonCreateRequest {
+export interface ParticipantCreateRequest {
   type: string
   firstName: string
   lastName?: string
@@ -19,6 +19,6 @@ export interface PersonCreateRequest {
   additionalInfo: string
 }
 
-export interface PersonUpdateRequest extends PersonCreateRequest {
+export interface ParticipantUpdateRequest extends ParticipantCreateRequest {
   uuid: string
 }

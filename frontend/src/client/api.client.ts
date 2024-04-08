@@ -1,4 +1,4 @@
-import type { PersonCreateRequest, PersonUpdateRequest } from '@/models/Person'
+import type { ParticipantCreateRequest, ParticipantUpdateRequest } from '@/models/Participant'
 import type { EventCreateRequest } from '@/models/Event'
 import axios from 'axios'
 
@@ -21,15 +21,15 @@ export default class ApiClient {
     return axios.get(`${apiUrl}/api/v1/events/${uuid}`)
   }
 
-  public static createPerson(eventUuid: string, request: PersonCreateRequest) {
+  public static createParticipant(eventUuid: string, request: ParticipantCreateRequest) {
     return axios.post(`${apiUrl}/api/v1/events/${eventUuid}/participants`, request)
   }
 
-  public static getPerson(uuid: string) {
+  public static getParticipant(uuid: string) {
     return axios.get(`${apiUrl}/api/v1/participants/${uuid}`)
   }
 
-  public static updatePerson(request: PersonUpdateRequest) {
+  public static updateParticipant(request: ParticipantUpdateRequest) {
     return axios.put(`${apiUrl}/api/v1/participants`, request)
   }
 

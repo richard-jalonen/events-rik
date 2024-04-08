@@ -28,9 +28,8 @@ public class ParticipantController {
         if (eventParticipant != null) {
             log.info("Found participant {}", eventParticipant.getUuid());
             return ResponseEntity.ok(createDto(eventParticipant));
-        } else {
-            return ResponseEntity.notFound().build();
         }
+        return ResponseEntity.notFound().build();
     }
 
     @PutMapping
@@ -44,8 +43,7 @@ public class ParticipantController {
         if (eventParticipantService.delete(uuid)) {
             log.info("Deleted participant-{}", uuid);
             return ResponseEntity.noContent().build();
-        } else {
-            return ResponseEntity.notFound().build();
         }
+        return ResponseEntity.notFound().build();
     }
 }

@@ -5,7 +5,7 @@
       <div class="col-6">{{ participant.firstName }} {{ participant.lastName }}</div>
       <div class="col-4">{{ participant.personCode }}</div>
       <div class="col-1">
-        <router-link :to="{ path: `/person/${participant.uuid}` }">
+        <router-link :to="{ path: `/participant/${participant.uuid}` }">
           <span class="text-sm text-dark-gray me-2">{{ $t('eventEdit.buttons.view') }}</span>
         </router-link>
         <span class="text-sm text-dark-gray link" @click="deleteParticipant(participant.uuid)">{{
@@ -17,14 +17,14 @@
 </template>
 
 <script lang="ts">
-import type { Person } from '@/models/Person'
+import type { Participant } from '@/models/Participant'
 import ApiClient from '@/client/api.client'
 import { defineComponent } from 'vue'
 
 export default defineComponent({
   props: {
     participants: {
-      type: Array as () => Person[],
+      type: Array as () => Participant[],
       required: true
     }
   },

@@ -28,7 +28,6 @@ public class Event extends AggregateRoot {
     private LocalDateTime time;
     @NotEmpty
     private String location;
-    private Long participantCount;
     @Column(length = 1000)
     private String additionalInfo;
 

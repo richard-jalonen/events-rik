@@ -64,6 +64,11 @@ public class EventParticipantService {
         EventParticipant eventParticipant = new EventParticipant();
         eventParticipant.setPerson(personService.create(request));
         eventParticipant.setPaymentType(request.getPaymentType());
+        if (request.getType().equalsIgnoreCase("PRIVATE")) {
+            eventParticipant.setParticipantCount(1L);
+        } else {
+            eventParticipant.setParticipantCount(request.getParticipantCount());
+        }
         eventParticipant.setAdditionalInfo(request.getAdditionalInfo());
         return eventParticipant;
     }

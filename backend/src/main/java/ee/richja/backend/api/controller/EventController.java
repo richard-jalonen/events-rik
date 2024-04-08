@@ -37,9 +37,8 @@ public class EventController {
         if (!events.isEmpty()) {
             log.info("Returning {} events", events.size());
             return ResponseEntity.ok(createDtoList(events));
-        } else {
-            return ResponseEntity.noContent().build();
         }
+        return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/{uuid}")
@@ -48,9 +47,8 @@ public class EventController {
         if (event != null) {
             log.info("Found event {}", event.getUuid());
             return ResponseEntity.ok(createDto(event));
-        } else {
-            return ResponseEntity.notFound().build();
         }
+        return ResponseEntity.notFound().build();
     }
 
     @PostMapping
@@ -85,8 +83,7 @@ public class EventController {
         if (eventService.delete(uuid)) {
             log.info("Deleted event with UUID: {}", uuid);
             return ResponseEntity.noContent().build();
-        } else {
-            return ResponseEntity.notFound().build();
         }
+        return ResponseEntity.notFound().build();
     }
 }

@@ -79,7 +79,7 @@
       "delete": "KUSTUTA"
     }
   },
-  "personAdd": {
+  "participantAdd": {
     "header": "Osavõtjate lisamine",
     "firstName": "Eesnimi:",
     "companyName": "Ettevõtte nimi:",
@@ -96,7 +96,7 @@
       "save": "Salvesta"
     }
   },
-  "personEdit": {
+  "participantEdit": {
     "header": "Osavõtja info"
   }
 }

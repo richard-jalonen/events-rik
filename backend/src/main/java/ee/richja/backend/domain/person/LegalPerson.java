@@ -10,5 +10,4 @@ import lombok.EqualsAndHashCode;
 @Data
 @DiscriminatorValue("LEGAL")
 public class LegalPerson extends Person {
-    private Long participantCount;
 }

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h4 class="text-blue fw-light mb-4">{{ $t('personAdd.header') }}</h4>
+    <h4 class="text-blue fw-light mb-4">{{ $t('participantAdd.header') }}</h4>
     <div class="d-flex offset-4">
       <div class="form-check me-4 mb-3 ms-2">
         <input
@@ -11,7 +11,9 @@
           name="flexRadioDefault"
           value="PRIVATE"
         />
-        <label class="form-check-label" for="private">{{ $t('personAdd.buttons.private') }} </label>
+        <label class="form-check-label" for="private"
+          >{{ $t('participantAdd.buttons.private') }}
+        </label>
       </div>
       <div class="form-check">
         <input
@@ -23,22 +25,22 @@
           value="LEGAL"
         />
         <label class="form-check-label" for="legal">
-          {{ $t('personAdd.buttons.legal') }}
+          {{ $t('participantAdd.buttons.legal') }}
         </label>
       </div>
     </div>
-    <PrivatePersonForm v-if="type === 'PRIVATE'" :event-uuid="eventUuid" />
-    <LegalPersonForm v-else :event-uuid="eventUuid" />
+    <PrivateParticipantForm v-if="type === 'PRIVATE'" :event-uuid="eventUuid" />
+    <LegalParticipantForm v-else :event-uuid="eventUuid" />
   </div>
 </template>
 
 <script lang="ts">
-import PrivatePersonForm from '@/components/person/PrivatePersonForm.vue'
-import LegalPersonForm from '@/components/person/LegalPersonForm.vue'
+import PrivateParticipantForm from '@/components/participant/PrivateParticipantForm.vue'
+import LegalParticipantForm from '@/components/participant/LegalParticipantForm.vue'
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  components: { PrivatePersonForm, LegalPersonForm },
+  components: { LegalParticipantForm, PrivateParticipantForm },
   props: {
     eventUuid: {
       type: String,
