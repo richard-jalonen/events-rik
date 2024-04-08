@@ -6,15 +6,22 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts">
 import AppHeader from '@/components/common/header/AppHeader.vue'
 import AppFooter from '@/components/common/footer/AppFooter.vue'
 import { usePaymentStore } from '@/stores/payment'
 import { RouterView } from 'vue-router'
+import { defineComponent } from 'vue'
 
-initialize()
-
-async function initialize() {
-  await usePaymentStore().initialize()
-}
+export default defineComponent({
+  components: { AppHeader, AppFooter, RouterView },
+  created() {
+    this.initialize()
+  },
+  methods: {
+    async initialize() {
+      await usePaymentStore().initialize()
+    }
+  }
+})
 </script>

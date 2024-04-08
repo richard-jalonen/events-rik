@@ -1,12 +1,27 @@
 import { useToast } from 'vue-toast-notification'
+import { useGlobalStore } from '@/stores/global'
 import axios from 'axios'
 
 const toast = useToast()
 
-export function useAxiosErrorHandler() {
-  axios.interceptors.response.use(
-    (response) => response,
+export function useAxiosInterceptor() {
+  axios.interceptors.request.use(
+    (config) => {
+      useGlobalStore().setLoading(true)
+      return config
+    },
     (error) => {
+      return Promise.reject(error)
+    }
+  )
+
+  axios.interceptors.response.use(
+    (response) => {
+      useGlobalStore().setLoading(false)
+      return response
+    },
+    (error) => {
+      useGlobalStore().setLoading(false)
       if (!error.response) {
         toast.error('Network Error')
         return Promise.reject(error)

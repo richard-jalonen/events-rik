@@ -1,4 +1,4 @@
-import { useAxiosErrorHandler } from '@/client/axios.error.handler'
+import { useAxiosInterceptor } from '@/client/axios.interceptor'
 import 'vue-toast-notification/dist/theme-bootstrap.css'
 import 'bootstrap-vue-next/dist/bootstrap-vue-next.css'
 import ToastPlugin from 'vue-toast-notification'
@@ -21,7 +21,7 @@ const i18n = createI18n({
   legacy: false
 })
 
-useAxiosErrorHandler()
+useAxiosInterceptor()
 app.use(ToastPlugin)
 app.use(createPinia())
 app.use(router)
