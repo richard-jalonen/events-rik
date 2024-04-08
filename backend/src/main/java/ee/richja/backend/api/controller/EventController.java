@@ -68,8 +68,7 @@ public class EventController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Event not found with UUID: " + uuid);
         }
 
-        EventParticipant eventParticipant = eventParticipantService.createEventParticipant(request);
-        eventService.addParticipantToEvent(uuid, eventParticipant);
+        eventService.addParticipantToEvent(uuid, request);
 
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()

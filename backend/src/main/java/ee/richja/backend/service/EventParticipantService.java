@@ -5,6 +5,7 @@ import ee.richja.backend.api.request.EventParticipantUpdateRequest;
 import ee.richja.backend.domain.event.EventParticipant;
 import ee.richja.backend.properties.PaymentProperties;
 import ee.richja.backend.repository.EventParticipantRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
@@ -17,6 +18,7 @@ import java.util.UUID;
 
 @Slf4j
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class EventParticipantService {
     private final EventParticipantRepository eventParticipantRepository;

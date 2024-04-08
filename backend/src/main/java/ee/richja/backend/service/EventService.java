@@ -1,6 +1,7 @@
 package ee.richja.backend.service;
 
 import ee.richja.backend.api.request.EventCreateRequest;
+import ee.richja.backend.api.request.EventParticipantCreateRequest;
 import ee.richja.backend.domain.event.Event;
 import ee.richja.backend.domain.event.EventParticipant;
 import ee.richja.backend.repository.EventRepository;
@@ -21,6 +22,7 @@ import java.util.UUID;
 @Transactional
 @RequiredArgsConstructor
 public class EventService {
+    private final EventParticipantService eventParticipantService;
     private final EventRepository eventRepository;
 
     public UUID create(EventCreateRequest request) {
@@ -42,9 +44,17 @@ public class EventService {
         return eventRepository.findAll();
     }
 
-    public void addParticipantToEvent(UUID eventUuid, EventParticipant eventParticipant) {
+    public void addParticipantToEvent(UUID eventUuid, EventParticipantCreateRequest request) {
         log.info("Adding participant to event-{}", eventUuid);
-        Event event = eventRepository.findById(eventUuid).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Event not found"));
+        EventParticipant eventParticipant = eventParticipantService.createEventParticipant(request);
+        Event event = eventRepository.findById(eventUuid).orElseThrow(() ->
+                new ResponseStatusException(HttpStatus.NOT_FOUND, "Event not found"));
+        if (event.getEventParticipants().stream()
+                .anyMatch(participant ->
+                        participant.getPerson().getPersonCode().equals(eventParticipant.getPerson().getPersonCode()))) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT,
+                    "Participant with the same person code already exists in the event");
+        }
         event.addParticipant(eventParticipant);
         eventRepository.save(event);
         log.info("Participant-{}", eventParticipant.getPerson().getUuid());
