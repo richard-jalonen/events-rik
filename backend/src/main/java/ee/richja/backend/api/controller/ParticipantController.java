@@ -25,11 +25,8 @@ public class ParticipantController {
     @GetMapping("/{uuid}")
     public ResponseEntity<EventParticipantDto> getParticipant(@PathVariable UUID uuid) {
         EventParticipant eventParticipant = eventParticipantService.getParticipant(uuid);
-        if (eventParticipant != null) {
-            log.info("Found participant {}", eventParticipant.getUuid());
-            return ResponseEntity.ok(createDto(eventParticipant));
-        }
-        return ResponseEntity.notFound().build();
+        log.info("Found participant-{}", eventParticipant.getUuid());
+        return ResponseEntity.ok(createDto(eventParticipant));
     }
 
     @PutMapping
@@ -40,10 +37,8 @@ public class ParticipantController {
 
     @DeleteMapping("/{uuid}")
     public ResponseEntity<Void> deleteParticipant(@PathVariable UUID uuid) {
-        if (eventParticipantService.delete(uuid)) {
-            log.info("Deleted participant-{}", uuid);
-            return ResponseEntity.noContent().build();
-        }
-        return ResponseEntity.notFound().build();
+        eventParticipantService.delete(uuid);
+        log.info("Deleted participant-{}", uuid);
+        return ResponseEntity.noContent().build();
     }
 }

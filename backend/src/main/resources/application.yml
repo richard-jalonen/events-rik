@@ -12,6 +12,10 @@ spring:
   mvc:
     log-resolved-exception: true
 
+server:
+  error:
+    include-message: always
+
 payment:
   types:
     - BANK_TRANSFER

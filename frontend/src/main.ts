@@ -1,17 +1,18 @@
-import { createPinia } from 'pinia'
-import { createApp } from 'vue'
-
-import createBootstrap from 'bootstrap-vue-next'
-import VueAxios from 'vue-axios'
-import router from './router'
-import App from './App.vue'
-import axios from 'axios'
-
+import { useAxiosErrorHandler } from '@/client/axios.error.handler'
+import 'vue-toast-notification/dist/theme-bootstrap.css'
 import 'bootstrap-vue-next/dist/bootstrap-vue-next.css'
+import ToastPlugin from 'vue-toast-notification'
+import createBootstrap from 'bootstrap-vue-next'
 import ee from '@/assets/messages.ee.json'
 import 'bootstrap/dist/css/bootstrap.css'
 import { createI18n } from 'vue-i18n'
+import { createPinia } from 'pinia'
+import VueAxios from 'vue-axios'
+import { createApp } from 'vue'
+import router from './router'
+import App from './App.vue'
 import '@/assets/app.css'
+import axios from 'axios'
 
 const app = createApp(App)
 const i18n = createI18n({
@@ -19,6 +20,9 @@ const i18n = createI18n({
   messages: { ee },
   legacy: false
 })
+
+useAxiosErrorHandler()
+app.use(ToastPlugin)
 app.use(createPinia())
 app.use(router)
 app.use(VueAxios, axios)

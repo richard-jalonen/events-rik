@@ -36,7 +36,9 @@ public class EventService {
 
     public Event getEventByUuid(UUID uuid) {
         log.info("Asking for event {}", uuid);
-        return eventRepository.findById(uuid).orElse(null);
+        return eventRepository.findById(uuid).orElseThrow(() ->
+                new ResponseStatusException(HttpStatus.NOT_FOUND, "Event not found")
+        );
     }
 
     public List<Event> getAllEvents() {
@@ -60,14 +62,13 @@ public class EventService {
         log.info("Participant-{}", eventParticipant.getPerson().getUuid());
     }
 
-    public boolean delete(UUID uuid) {
+    public void delete(UUID uuid) {
         log.info("Deleting event-{} ", uuid);
         try {
             eventRepository.deleteById(uuid);
-            return true;
         } catch (EmptyResultDataAccessException ex) {
-            log.warn("Event with UUID {} not found", uuid);
-            return false;
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+                    String.format("Event-%s not found", uuid));
         }
     }
 

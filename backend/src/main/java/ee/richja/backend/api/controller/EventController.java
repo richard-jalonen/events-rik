@@ -4,7 +4,6 @@ import ee.richja.backend.api.request.EventCreateRequest;
 import ee.richja.backend.api.request.EventParticipantCreateRequest;
 import ee.richja.backend.api.response.EventDto;
 import ee.richja.backend.domain.event.Event;
-import ee.richja.backend.domain.event.EventParticipant;
 import ee.richja.backend.service.EventParticipantService;
 import ee.richja.backend.service.EventService;
 import lombok.RequiredArgsConstructor;
@@ -44,11 +43,8 @@ public class EventController {
     @GetMapping("/{uuid}")
     public ResponseEntity<EventDto> getEvent(@PathVariable UUID uuid) {
         Event event = eventService.getEventByUuid(uuid);
-        if (event != null) {
-            log.info("Found event {}", event.getUuid());
-            return ResponseEntity.ok(createDto(event));
-        }
-        return ResponseEntity.notFound().build();
+        log.info("Found event {}", event.getUuid());
+        return ResponseEntity.ok(createDto(event));
     }
 
     @PostMapping
@@ -79,10 +75,8 @@ public class EventController {
 
     @DeleteMapping("/{uuid}")
     public ResponseEntity<Void> deleteEvent(@PathVariable UUID uuid) {
-        if (eventService.delete(uuid)) {
-            log.info("Deleted event with UUID: {}", uuid);
-            return ResponseEntity.noContent().build();
-        }
-        return ResponseEntity.notFound().build();
+        eventService.delete(uuid);
+        log.info("Deleted event with UUID: {}", uuid);
+        return ResponseEntity.noContent().build();
     }
 }

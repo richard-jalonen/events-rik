@@ -41,16 +41,16 @@ public class PersonService {
     private Person createPerson(EventParticipantCreateRequest request) {
         Person person;
         if (request.getType().equalsIgnoreCase("LEGAL")) {
-            person = getLegalPerson(request);
+            person = createLegalPerson(request);
         } else if (request.getType().equalsIgnoreCase("PRIVATE")) {
-            person = getPrivatePerson(request);
+            person = createPrivatePerson(request);
         } else {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Unknown person type: " + request.getType());
         }
         return personRepository.save(person);
     }
 
-    private static PrivatePerson getPrivatePerson(EventParticipantCreateRequest request) {
+    private static PrivatePerson createPrivatePerson(EventParticipantCreateRequest request) {
         PrivatePerson privatePerson = new PrivatePerson();
         privatePerson.setFirstName(request.getFirstName());
         privatePerson.setLastName(request.getLastName());
@@ -61,7 +61,7 @@ public class PersonService {
         return privatePerson;
     }
 
-    private static LegalPerson getLegalPerson(EventParticipantCreateRequest request) {
+    private static LegalPerson createLegalPerson(EventParticipantCreateRequest request) {
         LegalPerson legalPerson = new LegalPerson();
         legalPerson.setFirstName(request.getFirstName());
         if (request.getPersonCode().length() != 8) {

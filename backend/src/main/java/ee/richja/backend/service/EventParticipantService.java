@@ -26,7 +26,9 @@ public class EventParticipantService {
     private final PaymentProperties paymentProperties;
 
     public EventParticipant getParticipant(UUID uuid) {
-        return eventParticipantRepository.findById(uuid).orElse(null);
+        return eventParticipantRepository.findById(uuid).orElseThrow(() ->
+                new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Participant %s not found", uuid))
+        );
     }
 
     public void update(EventParticipantUpdateRequest request) {
@@ -34,7 +36,9 @@ public class EventParticipantService {
         validateRequest(request);
         EventParticipant eventParticipant = eventParticipantRepository.findById(request.getUuid())
                 .orElseThrow(() ->
-                        new ResponseStatusException(HttpStatus.NOT_FOUND, "Person not found"));
+                        new ResponseStatusException(HttpStatus.NOT_FOUND,
+                                String.format("Participant %s not found", request.getUuid()))
+                );
 
         personService.update(request, eventParticipant.getPerson());
         BeanUtils.copyProperties(request, eventParticipant);
@@ -47,18 +51,20 @@ public class EventParticipantService {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Person type cannot be null");
         }
         if (!paymentProperties.getTypes().contains(request.getPaymentType())) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid payment type");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                    String.format("Invalid payment type: %s", request.getPaymentType())
+            );
         }
     }
 
-    public boolean delete(UUID uuid) {
+    public void delete(UUID uuid) {
         log.info("Deleting participant-{} ", uuid);
         try {
             eventParticipantRepository.deleteById(uuid);
-            return true;
         } catch (EmptyResultDataAccessException ex) {
-            log.warn("Participant with UUID {} not found", uuid);
-            return false;
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                    String.format("Participant with UUID %s not found", uuid)
+            );
         }
     }
 
