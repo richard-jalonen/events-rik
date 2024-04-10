@@ -1,6 +1,6 @@
-import { useToast } from 'vue-toast-notification'
 import { useGlobalStore } from '@/stores/global'
 import axios from 'axios'
+import { useToast } from 'vue-toast-notification'
 
 const toast = useToast()
 

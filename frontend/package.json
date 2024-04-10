@@ -7,12 +7,12 @@
     "dev": "vite",
     "build": "run-p type-check \"build-only {@}\" --",
     "preview": "vite preview",
-    "test:unit": "vitest",
+    "test:unit": "vitest --coverage",
     "test:e2e": "nightwatch tests/e2e/*",
     "build-only": "vite build",
     "type-check": "vue-tsc --build --force",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
-    "format": "prettier --write src/"
+    "format": "prettier --write src/ tests/unit/"
   },
   "dependencies": {
     "@vuelidate/core": "^2.0.3",
@@ -24,6 +24,7 @@
     "vue-axios": "^3.5.2",
     "vue-i18n": "^9.11.0",
     "vue-router": "^4.3.0",
+    "vue-router-mock": "^1.1.0",
     "vue-toast-notification": "^3.1.2"
   },
   "devDependencies": {
@@ -33,6 +34,7 @@
     "@types/jsdom": "^21.1.6",
     "@types/node": "^20.12.5",
     "@vitejs/plugin-vue": "^5.0.4",
+    "@vitest/coverage-istanbul": "^1.4.0",
     "@vue/eslint-config-prettier": "^8.0.0",
     "@vue/eslint-config-typescript": "^12.0.0",
     "@vue/test-utils": "^2.4.5",
@@ -45,6 +47,7 @@
     "nightwatch": "^3.5.0",
     "npm-run-all2": "^6.1.2",
     "prettier": "^3.0.3",
+    "prettier-plugin-organize-imports": "^3.2.4",
     "prettier-plugin-sort-imports": "^1.8.5",
     "ts-node": "^10.9.2",
     "typescript": "~5.4.0",

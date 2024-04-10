@@ -37,9 +37,7 @@ export default defineComponent({
   data() {
     return {
       logoSrc,
-      symbolSrc,
-      isActive: true,
-      hasError: false
+      symbolSrc
     }
   },
   computed: {

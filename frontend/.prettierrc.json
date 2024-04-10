@@ -6,6 +6,7 @@
   "printWidth": 100,
   "trailingComma": "none",
   "plugins": [
-    "prettier-plugin-sort-imports"
+    "prettier-plugin-sort-imports",
+    "prettier-plugin-organize-imports"
   ]
 }

@@ -38,6 +38,9 @@
               error: v$.form.personCode.$error
             }"
           />
+          <div v-if="v$.form.personCode.$error" class="text-danger">
+            {{ $t('common.error.personCode') }}
+          </div>
         </div>
       </div>
       <div class="row mb-3">
