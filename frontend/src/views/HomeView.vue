@@ -3,6 +3,7 @@
     <WelcomeBanner />
     <div class="my-4 grid d-flex gap-4">
       <EventsOverview
+        id="upcoming-events"
         class="col"
         :events="upcomingEvents"
         :translations="translations.ee.home.upcomingEvents"
@@ -10,6 +11,7 @@
         @event-deleted="initialize"
       />
       <EventsOverview
+        id="past-events"
         :events="pastEvents"
         class="col"
         :translations="translations.ee.home.pastEvents"

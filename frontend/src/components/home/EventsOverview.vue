@@ -32,7 +32,9 @@
       </div>
       <div class="mt-4">
         <router-link to="/event"
-          ><span class="text-dark-gray">{{ translations.addEvent }}</span></router-link
+          ><span id="add-event" class="text-dark-gray">{{
+            translations.addEvent
+          }}</span></router-link
         >
       </div>
     </div>

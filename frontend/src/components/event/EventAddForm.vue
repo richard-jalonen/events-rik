@@ -5,6 +5,7 @@
       <div class="row mb-2">
         <div class="col-4">{{ $t('eventAdd.form.eventName') }}</div>
         <input
+          id="event-name"
           v-model="form.eventName"
           class="col"
           :class="{
@@ -15,6 +16,7 @@
       <div class="row mb-2">
         <div class="col-4">{{ $t('eventAdd.form.eventTime') }}</div>
         <input
+          id="event-time"
           v-model="form.eventTime"
           class="col"
           type="datetime-local"
@@ -26,6 +28,7 @@
       <div class="row mb-2">
         <div class="col-4">{{ $t('eventAdd.form.location') }}</div>
         <input
+          id="event-location"
           v-model="form.eventLocation"
           class="col"
           :class="{
@@ -35,14 +38,14 @@
       </div>
       <div class="row">
         <div class="col-4">{{ $t('eventAdd.form.additionalInfo') }}</div>
-        <textarea v-model="form.eventAdditionalInfo" class="col" />
+        <textarea id="event-info" v-model="form.eventAdditionalInfo" class="col" />
       </div>
     </div>
     <div class="d-flex gap-2">
       <button type="button" class="btn btn-secondary btn-sm" @click="router.go(-1)">
         {{ $t('eventAdd.form.buttons.back') }}
       </button>
-      <button type="button" class="btn btn-primary btn-sm" @click="addEvent">
+      <button id="add-event-btn" type="button" class="btn btn-primary btn-sm" @click="addEvent">
         {{ $t('eventAdd.form.buttons.add') }}
       </button>
     </div>
