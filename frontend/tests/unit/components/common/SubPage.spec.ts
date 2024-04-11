@@ -3,7 +3,7 @@ import { describe, expect, it } from 'vitest'
 import { shallowMount } from '@vue/test-utils'
 import { createPinia, setActivePinia } from 'pinia'
 import { beforeEach } from 'vitest'
-import SubPage from '../../../src/components/common/SubPage.vue'
+import SubPage from '../../../../src/components/common/SubPage.vue'
 
 describe('SubPage', () => {
   beforeEach(() => {

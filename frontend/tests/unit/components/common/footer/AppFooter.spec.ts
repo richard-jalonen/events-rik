@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 
 import { shallowMount } from '@vue/test-utils'
-import AppFooter from '../../../../src/components/common/footer/AppFooter.vue'
+import AppFooter from '../../../../../src/components/common/footer/AppFooter.vue'
 
 describe('AppFooter', () => {
   it('contains sub-components', () => {

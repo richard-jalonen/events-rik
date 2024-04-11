@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 
 import { mount } from '@vue/test-utils'
-import AppHeader from '../../../../src/components/common/header/AppHeader.vue'
+import AppHeader from '../../../../../src/components/common/header/AppHeader.vue'
 
 describe('AppHeader', () => {
   it('contains images', () => {

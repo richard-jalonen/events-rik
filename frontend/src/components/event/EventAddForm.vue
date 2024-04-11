@@ -62,11 +62,10 @@ const isFutureTime = (value: string) => {
 }
 
 export default defineComponent({
-  setup() {
-    return { v$: useVuelidate(), isFutureTime }
-  },
   data() {
     return {
+      v$: useVuelidate(),
+      isFutureTime,
       router,
       FormatUtil,
       form: {

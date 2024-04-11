@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 
 import { mount } from '@vue/test-utils'
-import GeneralInfo from '../../../../src/components/common/footer/GeneralInfo.vue'
+import GeneralInfo from '../../../../../src/components/common/footer/GeneralInfo.vue'
 
 describe('GeneralInfo', () => {
   it('contains required components', () => {

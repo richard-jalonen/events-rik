@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 
 import { mount } from '@vue/test-utils'
-import ContactInfo from '../../../../src/components/common/footer/ContactInfo.vue'
+import ContactInfo from '../../../../../src/components/common/footer/ContactInfo.vue'
 
 describe('ContactInfo', () => {
   it('contains required components', () => {

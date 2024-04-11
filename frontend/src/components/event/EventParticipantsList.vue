@@ -8,11 +8,15 @@
         <router-link :to="{ path: `/participant/${participant.uuid}` }">
           <span class="text-sm text-dark-gray me-2">{{ $t('eventEdit.buttons.view') }}</span>
         </router-link>
-        <span class="text-sm text-dark-gray link" @click="deleteParticipant(participant.uuid)">{{
+        <span class="text-sm text-dark-gray link" @click="openModal(participant)">{{
           $t('eventEdit.buttons.delete')
         }}</span>
       </div>
     </div>
+    <BModal v-model="showModal" :title="$t('eventEdit.modal.header')" @ok="deleteParticipant">
+      {{ $t('eventEdit.modal.confirmation') }} {{ participantToDelete?.firstName }}
+      {{ participantToDelete?.lastName }}
+    </BModal>
   </div>
 </template>
 
@@ -20,8 +24,10 @@
 import type { Participant } from '@/models/Participant'
 import ApiClient from '@/client/api.client'
 import { defineComponent } from 'vue'
+import { BModal } from 'bootstrap-vue-next'
 
 export default defineComponent({
+  components: { BModal },
   props: {
     participants: {
       type: Array as () => Participant[],
@@ -29,12 +35,19 @@ export default defineComponent({
     }
   },
   data() {
-    return {}
+    return {
+      showModal: false,
+      participantToDelete: null as Participant | null
+    }
   },
   methods: {
-    async deleteParticipant(participantUuid: string) {
+    openModal(participant: Participant) {
+      this.participantToDelete = participant
+      this.showModal = true
+    },
+    async deleteParticipant() {
       try {
-        await ApiClient.deleteParticipant(participantUuid)
+        await ApiClient.deleteParticipant(this.participantToDelete?.uuid!!)
         this.$emit('participantDeleted')
       } catch (error) {
         console.error('Error deleting participant:', error)

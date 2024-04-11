@@ -25,7 +25,7 @@
               alt="remove"
               style="max-width: 1em"
               @load="true"
-              @click="deleteEvent(event)"
+              @click="openModal(event)"
             />
           </div>
         </div>
@@ -36,6 +36,9 @@
         >
       </div>
     </div>
+    <BModal v-model="showModal" :title="$t('home.modal.header')" @ok="deleteEvent">
+      {{ $t('home.modal.confirmation') }} {{ eventToDelete?.name }}
+    </BModal>
   </div>
 </template>
 
@@ -45,8 +48,10 @@ import ApiClient from '@/client/api.client'
 import FormatUtil from '@/util/format.util'
 import type { Event } from '@/models/Event'
 import { defineComponent } from 'vue'
+import { BModal } from 'bootstrap-vue-next'
 
 export default defineComponent({
+  components: { BModal },
   props: {
     translations: {
       type: Object,
@@ -64,13 +69,19 @@ export default defineComponent({
   data() {
     return {
       FormatUtil,
-      removeSvg
+      removeSvg,
+      showModal: false,
+      eventToDelete: null as Event | null
     }
   },
   methods: {
-    async deleteEvent(event: Event) {
+    openModal(event: Event) {
+      this.eventToDelete = event
+      this.showModal = true
+    },
+    async deleteEvent() {
       try {
-        await ApiClient.deleteEvent(event.uuid)
+        await ApiClient.deleteEvent(this.eventToDelete?.uuid!!)
         this.$emit('eventDeleted')
       } catch (error) {
         console.error('Error deleting event:', error)
