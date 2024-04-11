@@ -14,7 +14,9 @@ import java.util.UUID;
 
 public class TestObjectFactory {
     public static Event createEvent() {
-        return Event.builder().time(LocalDateTime.now()).build();
+        Event event = new Event();
+        event.setTime(LocalDateTime.now());
+        return event;
     }
 
     public static EventParticipant createEventParticipant() {
