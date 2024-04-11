@@ -6,8 +6,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
@@ -17,6 +16,9 @@ import java.util.UUID;
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Event extends AggregateRoot {
     @Id
     @GeneratedValue
@@ -31,8 +33,9 @@ public class Event extends AggregateRoot {
     @Column(length = 1000)
     private String additionalInfo;
 
+    @Builder.Default
     @OneToMany(mappedBy = "event", cascade = CascadeType.ALL)
-    private Set<EventParticipant> eventParticipants = new HashSet<>();
+    private transient Set<EventParticipant> eventParticipants = new HashSet<>();
 
     public void addParticipant(EventParticipant eventParticipant) {
         eventParticipants.add(eventParticipant);
