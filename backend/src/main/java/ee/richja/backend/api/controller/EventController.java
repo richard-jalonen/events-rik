@@ -4,7 +4,6 @@ import ee.richja.backend.api.request.EventCreateRequest;
 import ee.richja.backend.api.request.EventParticipantCreateRequest;
 import ee.richja.backend.api.response.EventDto;
 import ee.richja.backend.domain.event.Event;
-import ee.richja.backend.service.EventParticipantService;
 import ee.richja.backend.service.EventService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -28,7 +27,6 @@ import static ee.richja.backend.api.response.EventDto.createDtoList;
 @RequiredArgsConstructor
 public class EventController {
     private final EventService eventService;
-    private final EventParticipantService eventParticipantService;
 
     @GetMapping
     public ResponseEntity<List<EventDto>> getAllEvents() {
