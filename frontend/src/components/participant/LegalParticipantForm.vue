@@ -5,6 +5,7 @@
         <div class="col-4">{{ $t('participantAdd.companyName') }}</div>
         <div class="col">
           <input
+            id="name"
             v-model="form.companyName"
             class="w-100"
             type="text"
@@ -18,6 +19,7 @@
         <div class="col-4">{{ $t('participantAdd.companyCode') }}</div>
         <div class="col">
           <input
+            id="code"
             v-model="form.personCode"
             class="w-100"
             type="number"
@@ -34,6 +36,7 @@
         <div class="col-4">{{ $t('participantAdd.participantCount') }}</div>
         <div class="col">
           <input
+            id="count"
             v-model="form.participantCount"
             class="w-100"
             type="number"
@@ -47,6 +50,7 @@
         <div class="col-4">{{ $t('participantAdd.paymentType') }}</div>
         <div class="col">
           <select
+            id="payment-type"
             v-model="form.paymentType"
             class="w-100"
             :class="{
@@ -61,6 +65,7 @@
         <div class="col-4">{{ $t('participantAdd.additionalInfo') }}</div>
         <div class="col">
           <textarea
+            id="additional-info"
             v-model="form.additionalInfo"
             :maxlength="maxAdditionalInfoLength"
             class="w-100"
@@ -70,10 +75,15 @@
       </div>
     </div>
     <div class="d-flex gap-2 mt-4">
-      <button type="button" class="btn btn-secondary btn-sm" @click="router.go(-1)">
+      <button type="button" class="btn btn-secondary btn-sm" @click="$router.go(-1)">
         {{ $t('participantAdd.buttons.back') }}
       </button>
-      <button type="button" class="btn btn-primary btn-sm" @click="addParticipant">
+      <button
+        id="add-participant-btn"
+        type="button"
+        class="btn btn-primary btn-sm"
+        @click="addParticipant"
+      >
         {{ $t('participantAdd.buttons.save') }}
       </button>
     </div>
@@ -87,7 +97,6 @@ import { usePaymentStore } from '@/stores/payment'
 import ApiClient from '@/client/api.client'
 import useVuelidate from '@vuelidate/core'
 import { defineComponent } from 'vue'
-import router from '@/router'
 
 export default defineComponent({
   props: {
@@ -107,7 +116,6 @@ export default defineComponent({
   },
   data() {
     return {
-      router,
       form: {
         companyName: null as string | null,
         personCode: null as string | null,
@@ -164,10 +172,10 @@ export default defineComponent({
         }
         if (!this.participant) {
           await ApiClient.createParticipant(this.eventUuid!, request)
-          router.go(0)
+          this.$router.go(0)
         } else {
           await ApiClient.updateParticipant({ ...request, uuid: this.participant.uuid })
-          router.go(-1)
+          this.$router.go(-1)
         }
       }
     }

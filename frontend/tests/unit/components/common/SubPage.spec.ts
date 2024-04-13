@@ -10,7 +10,7 @@ describe('SubPage', () => {
     setActivePinia(createPinia())
   })
 
-  it('contains banner components', () => {
+  it('contains required components', () => {
     const wrapper = shallowMount(SubPage, {
       props: {
         bannerHeader: 'header'
