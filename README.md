@@ -4,6 +4,9 @@ From the root folder where docker-compose.yml is located run:
 ```bash
 docker-compose up --build
 ```
+
+After that, the application should be available at: http://localhost:8082/
+
 ### From bash/command line
 #### 1. PostgreSQL
 
